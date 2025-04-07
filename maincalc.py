@@ -272,7 +272,11 @@ while 'y' in repeat:
             ans = bin(start)
             ans = ans[2:]
             print('Your number in binary is ' + str(ans))
-
+        elif maththing == 10:
+            decimal = float(input('What is the percent: '))
+            decimal = decimal / 100
+            percent = Fraction(decimal).limit_denominator()
+            print(str(percent.numerator) + ' in ' + str(percent.denominator))
     if numprob == '2':
         twonumprob()
     if numprob == '3':

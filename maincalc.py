@@ -197,8 +197,8 @@ repeat = 'yes'
 while 'y' in repeat:
     numprob = input('How many numbers do you want in your problem ("extra" is an option): ') 
     if 'e' in numprob:
-        maththing = int(input('Do you want to turn a decimal into a Fraction, a Fraction to a decimal, a factorial, a set amount of the fibonacci sequence, exponents, a percent of a number,  the pythagorean theorem, or The energy of an obgect'
-        ' (1 for Decimal to Fraction, 2 for Fraction to decimal, 3 for factorial, 4 for a fibonacci sequence, 5 for exponents, 6 for a percent of a number,7 for the pythagorean theorem, 8 for  E=MC^2): '))
+        maththing = int(input('Do you want to turn a decimal into a Fraction, a Fraction to a decimal, a factorial, a set amount of the fibonacci sequence, exponents, a percent of a number,  the pythagorean theorem, finding the energy of an obgect, or converting an intager to binary'
+        ' (1 for Decimal to Fraction, 2 for Fraction to decimal, 3 for factorial, 4 for a fibonacci sequence, 5 for exponents, 6 for a percent of a number,7 for the pythagorean theorem, 8 for  E=MC^2, 9 for binary converter): '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -270,8 +270,9 @@ while 'y' in repeat:
         elif maththing == 9:
             start = int(input('What number do you want in binary: '))
             ans = bin(start)
-            ans = ans.strip('0b')
+            ans = ans[2:]
             print('Your number in binary is ' + str(ans))
+
     if numprob == '2':
         twonumprob()
     if numprob == '3':

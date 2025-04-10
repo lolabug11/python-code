@@ -1,14 +1,18 @@
 import datetime as date
 import time as t
-import random as r
+import random
 
 
 repeat = 'yes'
-while repeat == 'yes':
+while 'y' in repeat:
     current_year = date.datetime.now().year
     name = input('What is your name: ')
+    FirstLetter = name[0]
+    name = name[1:]
+    FirstLetter = FirstLetter.capitalize()
+    name = FirstLetter + name
     birthday =  input('Is it your birthday today: ')
-
+    birthday = birthday.lower()
     if 'y' in birthday:
         brithyear = int(input('What year were you born: '))
         age = current_year - brithyear
@@ -36,7 +40,21 @@ while repeat == 'yes':
             print("You are tied for the world recod of oldedt person alive!")
         else:
             print("Have a good birthdy")
-        repeat = input('do you want to repeat:')
+        a = int(age)/2
+        b = int(age)*2
+        holder = 0
+        guess = random.randint(int(a),int(b))
+        print(guess)
+        def guess():
+            guess = random.randint(0, 100)
+            a = age/2
+            b = age*2
+            while guess != age:
+                guess = random.randint(int(a), int(b))
+                inputv = input('Are you ' + str(guess)+ '?')
+            return print('')
+        guess()
+        repeat = input('')
     else:
         print('Have a good day, ' + name)
-        repeat = input('do you want to repeat:')
+        repeat = input('')

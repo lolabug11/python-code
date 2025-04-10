@@ -1,0 +1,6 @@
+if 'h' in higherorlower:
+    guess = guess - 5
+    print('Are you ' + str(guess) + '?')
+elif 'l' in higherorlower:
+    guess = guess + 5
+    print('Are you ' + str(guess) + '?')

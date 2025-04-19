@@ -5,7 +5,7 @@ import re
 
 def is_valid_expression(expr):
     #Allow digits, operators, and whitespace
-    return bool(re.fullmatch(r'[\d+\-*/ ().]+', expr))
+    return bool(re.fullmatch(r'[\d+\-*/ ().]+|\*\*', expr))
 
 def evaluate_expression(expr):
     if not is_valid_expression(expr):

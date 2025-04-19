@@ -17,17 +17,17 @@ while 'y' in repeat:
         brithyear = int(input('What year were you born: '))
         age = current_year - brithyear
         if age < 0:
-            print('You probably arnt able to even breathe let alone type so get lost you randon person from the future usin gmy code from 2025')
-        print('Happy ' + str(age) + 'th Birthday! :)')
-        t.sleep(0.5)
-        print('Happy Birthday to you,')
-        t.sleep(0.5)
-        print('Happy Birthday to you,')
-        t.sleep(0.5)
-        print('Happy Birthday dear ' + name + ',')
-        t.sleep(0.5)
-        print("Happy Birthday to youuuuuuuu!!!!")
-        t.sleep(0.5)
+            age = age * -1
+            print('Happy ' + str(age) + 'th Birthday! :)')
+            t.sleep(0.5)
+            print('Happy Birthday to you,')
+            t.sleep(0.5)
+            print('Happy Birthday to you,')
+            t.sleep(0.5)
+            print('Happy Birthday dear ' + name + ',')
+            t.sleep(0.5)
+            print("Happy Birthday to youuuuuuuu!!!!")
+            t.sleep(0.5)
         guess = 1
         while guess < age + 1:
             print('Are you ' + str(guess))
@@ -49,17 +49,15 @@ while 'y' in repeat:
         guess = random.randint(int(a),int(b))
         print(guess)
         def guess():
-            if age < 0:
-                age = int(age) * -1
             guess = random.randint(0, 100)
             a = age/2
             b = age*2
             while guess != age:
                 guess = random.randint(int(a), int(b))
-                inputv = input('Are you ' + str(guess)+ '?')
+                inputv = input('Are you ' + str(guess)+ '? ')
             return print('')
         guess()
         repeat = input('')
     else:
-        print('Have a good day, ' + name)
+        print('Have a good day, ' + name + '!')
         repeat = input('')

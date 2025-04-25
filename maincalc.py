@@ -31,8 +31,7 @@ while 'y' in repeat:
 
     numprob = input('Do you want to evaluate an expression or do extra functions (This is case sensitive): ') 
     if 'extra' in numprob:
-        maththing = int(input('Do you want to turn a decimal into a Fraction, a Fraction to a decimal, a factorial, a set amount of the fibonacci sequence, exponents, a percent of a number,  the pythagorean theorem, finding the energy of an obgect, converting an intager to binary, or converting a percent to words'
-        ' (1 for Decimal to Fraction, 2 for Fraction to decimal, 3 for factorial, 4 for a fibonacci sequence, 5 for exponents, 6 for a percent of a number,7 for the pythagorean theorem, 8 for  E=MC^2, 9 for binary converter, 10 for percent chance in words): '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -111,16 +110,38 @@ while 'y' in repeat:
             decimal = decimal / 100
             percent = Fraction(decimal).limit_denominator()
             print(str(percent.numerator) + ' in ' + str(percent.denominator))
-
-
-    # if numprob == '2':
-    #     twonumprob()
-    # if numprob == '3':
-    #     threenumprob()
-    # if numprob == '4':
-    #     fournumprob()
-    # if numprob == '5':
-    #     fivenumprob()
+        elif maththing == 11:
+            type = int(input('1 for lenth\n2 for weight/mass\n3 for tempature\nEnter your decision: '))
+            if type == 1:
+                convirsion = int(input('1 for customary to metric\n2 for metric to customary\nEnter your decision: '))
+                if convirsion == 1 :
+                    inches = float(input('How many inches: '))
+                    cm = inches*2.54
+                    print(str(inches) + ' in is ' + str(cm) + ' cm')
+                else:
+                    cm = float(input('How many centameters: '))
+                    inches  = cm/2.54
+                    print(str(cm)+' cm is ' +str(inches)+' in')
+            elif type == 2:
+                convirsion = int(input('1 for customary to metric\n2 for metric to customary\nEnter your decision: '))
+                if convirsion == 1:
+                    lbs = float(input('How many pounds: '))
+                    kg = lbs/2.20462
+                    print(str(lbs)+' pound(s) is '+str(kg)+' kilogram(s)')
+                else:
+                    g = float(input('How many grams: '))
+                    lbs = g/453.592
+                    print(str(g)+ ' gram(s) is '+str(lbs)+' pound(s)')
+            elif type == 3:
+                convirsion = int(input('1 for °F to °C\n2 for °C to °F\nEnter your decision: '))
+                if convirsion ==1:
+                    f = float(input('How many °F: '))
+                    c = (f - 32)*(5/9)
+                    print(str(f)+'° F is '+str(c)+'° C')
+                else:
+                    c = float(input('How many °C: '))
+                    f = (c*1.8)+32
+                    print(str(c)+'°C is ' +str(f)+'° F')
     elif 'evaluate' in numprob:
         problem = input("Enter your expression: ")
         result = evaluate_expression(problem)

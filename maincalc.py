@@ -101,10 +101,16 @@ while 'y' in repeat:
             frace = Fraction(e).limit_denominator()
             print('Your object has the energy (in J) of ' + str(e) + ' or as a fraction ' + str(frace))
         elif maththing == 9:
-            start = int(input('What number do you want in binary: '))
-            ans = bin(start)
-            ans = ans[2:]
-            print('Your number in binary is ' + str(ans))
+            convirsion = int(input('1 for binary to intager\n2 for intager to binary\nEnter your dicision: '))
+            if convirsion == 1:
+                start = input('What is your binary string: ')
+                ans = int(start, 2)
+                print(str(start)+' in intager form is '+str(ans))
+            else:
+                start = int(input('What number do you want in binary: '))
+                ans = bin(start)
+                ans = ans[2:]
+                print('Your number in binary is ' + str(ans))
         elif maththing == 10:
             decimal = float(input('What is the percent as a decimal: '))
             decimal = decimal / 100

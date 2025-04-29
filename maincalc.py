@@ -30,8 +30,10 @@ repeat = 'yes'
 while 'y' in repeat:
 
     numprob = input('Do you want to evaluate an expression or do extra functions (This is case sensitive): ') 
+    numprob = numprob.lower()
+
     if 'extra' in numprob:
-        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\nEnter your decision: '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -148,11 +150,64 @@ while 'y' in repeat:
                     c = float(input('How many °C: '))
                     f = (c*1.8)+32
                     print(str(c)+'°C is ' +str(f)+'° F')
+        elif maththing == 12:
+            #y=kx
+            known = int(input('What do you know\n1 k and y\n2 k and x\n3 y and x\nEnter your decision: '))
+            if known == 1:
+                k = float(input('What is k: '))
+                y = float(input('What is y: '))
+                x = y/k
+                print('x = ' + str(x))
+            elif known == 2:
+                k = float(input('What is k: '))
+                x = float(input('What is x: '))
+                y = k*x
+                print('y = '+str(y))
+            elif known == 3:
+                y = float(input('What is y: '))
+                x = float(input('What is x: '))
+                k = y/x
+                print('k = '+str(k))
+        elif maththing == 13:
+            type = int(input('What center of middle do you want to use\n1 mean\n2 median\n3 mode\nEnter your decision: '))
+            if type == 1:
+                i = int(input('How many intagers are in your data set: '))
+                e = '1'
+                ifi = i
+                dataset = {}
+                add = 0
+                while i > 0 and e != str(i):
+
+                    intagersa = float(input('What is the intager: '))
+                    dataset[e] = intagersa
+                    add += intagersa  
+                    i = i - 1
+                    e = int(e) + 1
+                print(dataset)
+                mean = add/ifi
+                print('The mean of '+ str(dataset)+' is '+str(mean))
+            elif type == 2:
+                i = int(input('How many intagers are in your data set: '))
+                e = 1
+                ifi = i/2
+                dataset={}
+                ifi = m.ceil(ifi)
+                while i > 0 and e!= i:
+                    dataset[e] = float(input('Enter your data 1 at a time and from smallest to largest:'))
+                    i-=1
+                    e+=1
+                print(dataset[ifi])
+
+                
     elif 'evaluate' in numprob:
         problem = input("Enter your expression: ")
         result = evaluate_expression(problem)
         ans = result
         print(f"{problem} = {result}")
+    elif 'corn' in numprob:
+        print('"Your that type of guy" - Jack Ford')
+    elif 'will' in numprob:
+        print('Midget')
 
     repeat = input('Do you want to do another problem (yes or no): ')
 print('Goodbye!') 

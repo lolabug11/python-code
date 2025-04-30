@@ -25,7 +25,7 @@ def factorial(n):
   else:
     return n * factorial(n - 1)
 
-
+timesrepeated = 0
 
 ans=0
 repeat = 'yes'
@@ -245,6 +245,12 @@ while 'y' in repeat:
         print('"Your that type of guy" - Jack Ford')
     elif 'will' in numprob:
         print('Midget')
-
+    
     repeat = input('Do you want to do another problem (yes or no): ')
+    if 'y' in repeat:
+        timesrepeated+=1
+statyn = input('Do you want to see your stats: ')
+if 'y' in statyn:
+    print('You have repeated the calculator '+str(timesrepeated)+' time(s)')
 print('Goodbye!')
+

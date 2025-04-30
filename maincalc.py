@@ -2,6 +2,8 @@ from fractions import Fraction
 import time as t
 import math as m
 import re
+from collections import Counter
+
 ans = 0
 def is_valid_expression(expr):
         #Allow digits, operators, and whitespace
@@ -29,16 +31,16 @@ ans=0
 repeat = 'yes'
 while 'y' in repeat:
 
-    numprob = input('Do you want to evaluate an expression or do extra functions (This is case sensitive): ') 
+    numprob = input('Do you want to evaluate an expression or do extra functions (This is case sensitive): ')
     numprob = numprob.lower()
 
     if 'extra' in numprob:
-        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\nEnter your decision: '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
             print(frac)
-        elif maththing == 2: 
+        elif maththing == 2:
             numarator = int(input("What is your numarator: "))
             demominator = int(input('What is your demominator: '))
             print(numarator/demominator)
@@ -73,7 +75,7 @@ while 'y' in repeat:
                     print(b)
                     t.sleep(0.25)
                     c = c - 1
-                    
+
             print('Done')
 
         elif maththing == 5:
@@ -172,52 +174,68 @@ while 'y' in repeat:
             type = int(input('What center of middle do you want to use\n1 mean\n2 median\n3 mode\nEnter your decision: '))
             if type == 1:
                 i = int(input('How many intagers are in your data set: '))
-                e = '1'
+                e = 1
                 ifi = i
                 dataset = {}
                 add = 0
-                while i > 0 and e != str(i):
+                while i > 0:
 
                     intagersa = float(input('What is the intager: '))
-                    dataset[e] = intagersa
-                    add += intagersa  
+                    dataset[str(e)] = intagersa
+                    add += intagersa
                     i = i - 1
-                    e = int(e) + 1
+                    e = e + 1
                 print(dataset)
                 mean = add/ifi
-                print('The mean of '+ str(dataset)+' is '+str(mean))
+                print('The mean of your data set is '+str(mean))
             elif type == 2:
-
-
-                dataset = {}
+                i = int(input('How many intagers are in your data set: '))
+                e = 1
+                ifi = i/2
+                dataset={}
+                ifi = m.ceil(ifi)
+                while i > 0 and e <= i:
+                    dataset[e] = float(input('Enter your data 1 at a time and from smallest to largest: '))
+                    i-=1
+                    e+=1
+                mid = m.ceil(len(dataset) / 2)
+                if len(dataset) % 2 == 0:
+                    mid_right = dataset[mid]
+                    mid_left = dataset[mid - 1]
+                    median = (mid_right + mid_left) / 2
+                    print('The median of your data set is', median)
+                else:
+                    median = dataset[mid]
+                    print('The median of your data set is', median)
+            elif type == 3:
                 i = int(input('How many numbers are in your data set: '))
+                dataset = {}
                 for e in range(1, i + 1):
-                    intager = float(input('What is your data point from lowest to highest: '))
+                    intager = float(input('What is your data point: '))
                     dataset[e] = intager
-                    
+                    print(dataset)
 
-                mid = i / 2
+                data_values = list(dataset.values())
+                value_counts = Counter(data_values)
+                most_common = value_counts.most_common()
 
-                if i % 2 == 0:  # Even number of elements
-                    mid_right = m.ceil(mid)
-                    mid_left = mid_right - 1
-                    if mid_left in dataset and mid_right in dataset:
-                        high = dataset[mid_right]
-                        low = dataset[mid_left]
-                        median = (high + low) / 2
-                        print('The median of your data set is', median)
+                print('Value Counts:', value_counts)
+                print('Most Common (value, frequency):', most_common)
+
+                if most_common:
+                    max_frequency = most_common[0][1]
+                    modes = [value for value, frequency in most_common if frequency == max_frequency]
+
+                    if len(modes) == 1:
+                        print('The mode of your data set is:', modes[0])
                     else:
-                        print('Error: Could not find middle elements.')
-                else:  # Odd number of elements
-                    middle_index = m.ceil(mid)
-                    if middle_index in dataset:
-                        median = dataset[middle_index]
-                        print('The median of your data set is', median)
-                    else:
-                        print('Error: Could not find middle element.')
+                        print('The modes of your data set are:', modes)
+                else:
+                    print('No data to calculate the mode.')
+            else:
+                print('Invalid input')
 
 
-                
     elif 'evaluate' in numprob:
         problem = input("Enter your expression: ")
         result = evaluate_expression(problem)
@@ -229,4 +247,4 @@ while 'y' in repeat:
         print('Midget')
 
     repeat = input('Do you want to do another problem (yes or no): ')
-print('Goodbye!') 
+print('Goodbye!')

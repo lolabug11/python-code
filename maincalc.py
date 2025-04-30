@@ -187,16 +187,35 @@ while 'y' in repeat:
                 mean = add/ifi
                 print('The mean of '+ str(dataset)+' is '+str(mean))
             elif type == 2:
-                i = int(input('How many intagers are in your data set: '))
-                e = 1
-                ifi = i/2
-                dataset={}
-                ifi = m.ceil(ifi)
-                while i > 0 and e!= i:
-                    dataset[e] = float(input('Enter your data 1 at a time and from smallest to largest:'))
-                    i-=1
-                    e+=1
-                print(dataset[ifi])
+
+
+                dataset = {}
+                i = int(input('How many numbers are in your data set: '))
+                for e in range(1, i + 1):
+                    intager = float(input('What is your data point from lowest to highest: '))
+                    dataset[e] = intager
+                    
+
+                mid = i / 2
+
+                if i % 2 == 0:  # Even number of elements
+                    mid_right = m.ceil(mid)
+                    mid_left = mid_right - 1
+                    if mid_left in dataset and mid_right in dataset:
+                        high = dataset[mid_right]
+                        low = dataset[mid_left]
+                        median = (high + low) / 2
+                        print('The median of your data set is', median)
+                    else:
+                        print('Error: Could not find middle elements.')
+                else:  # Odd number of elements
+                    middle_index = m.ceil(mid)
+                    if middle_index in dataset:
+                        median = dataset[middle_index]
+                        print('The median of your data set is', median)
+                    else:
+                        print('Error: Could not find middle element.')
+
 
                 
     elif 'evaluate' in numprob:

@@ -3,7 +3,7 @@ import time as t
 import math as m
 import re
 from collections import Counter
-
+extrarepeat= {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,13:0,14:0,15:0,16:0,17:0,18:0,19:0,}
 ans = 0
 def is_valid_expression(expr):
         #Allow digits, operators, and whitespace
@@ -37,18 +37,22 @@ while 'y' in repeat:
     if 'extra' in numprob:
         maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\nEnter your decision: '))
         if maththing == 1:
+            extrarepeat[1] += 1
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
             print(frac)
         elif maththing == 2:
+            extrarepeat[2] += 1
             numarator = int(input("What is your numarator: "))
             demominator = int(input('What is your demominator: '))
             print(numarator/demominator)
         elif maththing == 3:
+            extrarepeat[3] += 1
             n = int(input('What number do you want factorial: '))
             a = factorial(n)
             print(a)
         elif maththing == 4:
+            extrarepeat[4] += 1
             a = 1
             b = 1
             c = int(input("How many numbers do you want: "))
@@ -79,18 +83,21 @@ while 'y' in repeat:
             print('Done')
 
         elif maththing == 5:
+            extrarepeat[5] += 1
             base = float(input('What number do you want as your base: '))
             power = int(input('What power do you want to use: '))
             result = base**power
             fracresult = Fraction(result).limit_denominator()
             print(str(result) + ' and as a fraction ' + str(fracresult))
         elif maththing == 6:
+            extrarepeat[6] += 1
             mainnum= float(input('What number do want a percent of: '))
             percentage = int(input('What percent of the number above do you want: '))
             percentage = percentage / 100
             Answer = mainnum * percentage
             print('Your answer is ' + str(Answer))
         elif maththing == 7:
+            extrarepeat[7] += 1
             a = float(input('What is the first side of the right triangle: '))
             b = float(input('What is the second side of the right triange: '))
             a = a**2
@@ -99,12 +106,14 @@ while 'y' in repeat:
             c = m.sqrt(c)
             print('The hypotonuce of your right triange is ' + str(c) )
         elif maththing == 8:
+            extrarepeat[8] += 1
             mass = int(input('What is the mass of your object in grams: '))
             c = 89875517873681760
             e = mass*c
             frace = Fraction(e).limit_denominator()
             print('Your object has the energy (in J) of ' + str(e) + ' or as a fraction ' + str(frace))
         elif maththing == 9:
+            extrarepeat[9] += 1
             convirsion = int(input('1 for binary to intager\n2 for intager to binary\nEnter your dicision: '))
             if convirsion == 1:
                 start = input('What is your binary string: ')
@@ -116,11 +125,13 @@ while 'y' in repeat:
                 ans = ans[2:]
                 print('Your number in binary is ' + str(ans))
         elif maththing == 10:
+            extrarepeat[10] += 1
             decimal = float(input('What is the percent as a decimal: '))
             decimal = decimal / 100
             percent = Fraction(decimal).limit_denominator()
             print(str(percent.numerator) + ' in ' + str(percent.denominator))
         elif maththing == 11:
+            extrarepeat[11] += 1
             type = int(input('1 for lenth\n2 for weight/mass\n3 for tempature\nEnter your decision: '))
             if type == 1:
                 convirsion = int(input('1 for customary to metric\n2 for metric to customary\nEnter your decision: '))
@@ -154,6 +165,7 @@ while 'y' in repeat:
                     print(str(c)+'°C is ' +str(f)+'° F')
         elif maththing == 12:
             #y=kx
+            extrarepeat[12] += 1
             known = int(input('What do you know\n1 k and y\n2 k and x\n3 y and x\nEnter your decision: '))
             if known == 1:
                 k = float(input('What is k: '))
@@ -171,6 +183,7 @@ while 'y' in repeat:
                 k = y/x
                 print('k = '+str(k))
         elif maththing == 13:
+            extrarepeat[13] += 1
             type = int(input('What center of middle do you want to use\n1 mean\n2 median\n3 mode\nEnter your decision: '))
             if type == 1:
                 i = int(input('How many intagers are in your data set: '))
@@ -252,5 +265,7 @@ while 'y' in repeat:
 statyn = input('Do you want to see your stats: ')
 if 'y' in statyn:
     print('You have repeated the calculator '+str(timesrepeated)+' time(s)')
+    print('You have done each extra feature (feature:times)')
+    print(extrarepeat)
 print('Goodbye!')
 

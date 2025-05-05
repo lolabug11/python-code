@@ -37,22 +37,21 @@ while 'y' in repeat:
     if 'extra' in numprob:
         maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\nEnter your decision: '))
         if maththing == 1:
-            extrarepeat[1] += 1
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
             print(frac)
         elif maththing == 2:
-            extrarepeat[2] += 1
+
             numarator = int(input("What is your numarator: "))
             demominator = int(input('What is your demominator: '))
             print(numarator/demominator)
         elif maththing == 3:
-            extrarepeat[3] += 1
+
             n = int(input('What number do you want factorial: '))
             a = factorial(n)
             print(a)
         elif maththing == 4:
-            extrarepeat[4] += 1
+
             a = 1
             b = 1
             c = int(input("How many numbers do you want: "))
@@ -83,7 +82,7 @@ while 'y' in repeat:
             print('Done')
 
         elif maththing == 5:
-            extrarepeat[5] += 1
+
             base = float(input('What number do you want as your base: '))
             power = int(input('What power do you want to use: '))
             result = base**power
@@ -97,7 +96,7 @@ while 'y' in repeat:
             Answer = mainnum * percentage
             print('Your answer is ' + str(Answer))
         elif maththing == 7:
-            extrarepeat[7] += 1
+
             a = float(input('What is the first side of the right triangle: '))
             b = float(input('What is the second side of the right triange: '))
             a = a**2
@@ -106,14 +105,14 @@ while 'y' in repeat:
             c = m.sqrt(c)
             print('The hypotonuce of your right triange is ' + str(c) )
         elif maththing == 8:
-            extrarepeat[8] += 1
+
             mass = int(input('What is the mass of your object in grams: '))
             c = 89875517873681760
             e = mass*c
             frace = Fraction(e).limit_denominator()
             print('Your object has the energy (in J) of ' + str(e) + ' or as a fraction ' + str(frace))
         elif maththing == 9:
-            extrarepeat[9] += 1
+
             convirsion = int(input('1 for binary to intager\n2 for intager to binary\nEnter your dicision: '))
             if convirsion == 1:
                 start = input('What is your binary string: ')
@@ -125,13 +124,12 @@ while 'y' in repeat:
                 ans = ans[2:]
                 print('Your number in binary is ' + str(ans))
         elif maththing == 10:
-            extrarepeat[10] += 1
             decimal = float(input('What is the percent as a decimal: '))
             decimal = decimal / 100
             percent = Fraction(decimal).limit_denominator()
             print(str(percent.numerator) + ' in ' + str(percent.denominator))
         elif maththing == 11:
-            extrarepeat[11] += 1
+
             type = int(input('1 for lenth\n2 for weight/mass\n3 for tempature\nEnter your decision: '))
             if type == 1:
                 convirsion = int(input('1 for customary to metric\n2 for metric to customary\nEnter your decision: '))
@@ -165,7 +163,7 @@ while 'y' in repeat:
                     print(str(c)+'°C is ' +str(f)+'° F')
         elif maththing == 12:
             #y=kx
-            extrarepeat[12] += 1
+
             known = int(input('What do you know\n1 k and y\n2 k and x\n3 y and x\nEnter your decision: '))
             if known == 1:
                 k = float(input('What is k: '))
@@ -183,7 +181,7 @@ while 'y' in repeat:
                 k = y/x
                 print('k = '+str(k))
         elif maththing == 13:
-            extrarepeat[13] += 1
+            
             type = int(input('What center of middle do you want to use\n1 mean\n2 median\n3 mode\nEnter your decision: '))
             if type == 1:
                 i = int(input('How many intagers are in your data set: '))
@@ -202,30 +200,38 @@ while 'y' in repeat:
                 mean = add/ifi
                 print('The mean of your data set is '+str(mean))
             elif type == 2:
-                i = int(input('How many intagers are in your data set: '))
+                aod = int(input('How many data points are in your data set: '))
+                i = aod
                 e = 1
-                ifi = i/2
-                dataset={}
-                ifi = m.ceil(ifi)
-                while i > 0 and e <= i:
-                    dataset[e] = float(input('Enter your data 1 at a time and from smallest to largest: '))
-                    i-=1
-                    e+=1
-                mid = m.ceil(len(dataset) / 2)
-                if len(dataset) % 2 == 0:
-                    mid_right = dataset[mid]
-                    mid_left = dataset[mid - 1]
-                    median = (mid_right + mid_left) / 2
-                    print('The median of your data set is', median)
-                else:
-                    median = dataset[mid]
-                    print('The median of your data set is', median)
+                data = {}
+                if aod % 2 == 0:
+                    lowmid = aod/2
+                    lowmid = m.floor(lowmid)
+                    highmid = aod/2
+                    highmid += 1
+                    while i > 0:
+                        data[e] = float(input('What is your data point (from lowest to highest): '))
+                        i -= 1
+                        e += 1
+                    highmid = data[highmid]
+                    lowmid = data[lowmid]
+                    mid = (highmid + lowmid)/2
+                    print(mid)
+#C10H15N
+                elif aod % 2 != 0:
+                    mid = aod/2
+                    mid = m.ceil(mid)
+                    while i > 0:
+                        data[e] = float(input('What is your data point (from lowest to highest): '))
+                        i -= 1
+                        e += 1
+                    print(data[mid])
             elif type == 3:
                 i = int(input('How many numbers are in your data set: '))
-                dataset = {}
+                data = {}
                 for e in range(1, i + 1):
                     intager = float(input('What is your data point: '))
-                    dataset[e] = intager
+                    data[e] = intager
                     print(dataset)
 
                 data_values = list(dataset.values())
@@ -258,6 +264,8 @@ while 'y' in repeat:
         print('"Your that type of guy" - Jack Ford')
     elif 'will' in numprob:
         print('Midget')
+    elif 'jack' in numprob:
+        print('C10H15N')
     
     repeat = input('Do you want to do another problem (yes or no): ')
     if 'y' in repeat:
@@ -268,4 +276,3 @@ if 'y' in statyn:
     print('You have done each extra feature (feature:times)')
     print(extrarepeat)
 print('Goodbye!')
-

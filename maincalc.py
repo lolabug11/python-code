@@ -278,21 +278,12 @@ while 'y' in repeat:
                     rs = r**2
                     pi = 3.14159265359
                     l = m.sqrt(rs+hs)
-                    b = pi*rs
-                    
-                    # # print(slanthight)
-                    # # # area = 3.14*r*(r+ m.sqrt(h2+r2))
-                    # # # area = (3.14*rtwo)+(3.14*r*h)
-                    # # # area = 3.14*r*slanthight
-                    # L = pi*r*m.sqrt(rs+hs)
-                    # # # area = (pi*r*s) + (pi *rs)
-                    # area = b + L
-                    #pi r ^2 + prl
-                    # S = pi*r*s
-                    # area = S + b
+                    b = pi*rs  
                     area = (pi*rs)+(pi*r*l)
-                    
-                    print('The area of your cone is '+str(area))
+                    print(l)
+                    print('The Surface area of your cone is '+str(area))
+                    v = pi*r2*(h/3)
+                    print('The volume of your cone is '+str(v))
     elif 'evaluate' in numprob:
         problem = input("Enter your expression: ")
         result = evaluate_expression(problem)

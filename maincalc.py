@@ -35,7 +35,7 @@ while 'y' in repeat:
     numprob = numprob.lower()
 
     if 'extra' in numprob:
-        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\nEnter your decision: '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -265,12 +265,39 @@ while 'y' in repeat:
                     side1 = float(input('What is the leangth of 1 side of your square: '))
                     area = side1**2
                     print('The area of your square is '+str(area))
+                elif areaof_ ==2:
+                    l = float(input('What is the leangth of your rectangle: '))
+                    w = float(input('What is the width of your rectangle'))
+                    a = l*w
+                    print(a)
+                elif areaof_ ==3:
+                    l = float(input('What is the leangth of your triangle: '))
+                    w = float(input('What is the width of your triangle: '))
+                    a=1/2*l*w
+                    print(a)
             else:
-                areaof_ = int(input('What shape do you want to fiind the area of\n1 for cube\n2 for prism\n3 for pyrimid\n4 for cone\nEnter your disicion: '))
+                areaof_ = int(input('What shape do you want to fiind the area of\n1 for cube\n2 for prism\n3 for a right rectangular pyramid\n4 for cone\n5 for sphere\nEnter your disicion: '))
                 if areaof_ == 1:
                     side = float(input('What is a side of your cube: '))
                     area = 6*side**2
                     print('The area of your cube is '+str(area))
+                elif areaof_ == 2:
+
+                    h = float(input("What is your prism's hight: "))
+                    B = float(input('What is the area of your prims base: '))
+                    P = float(input('What is the pirimiter of your prims base: '))
+                    SA = B*P*h
+                    print('The surface area of your prism is '+str(SA))
+                    V = B*h
+                    print('The volume of your prism is '+str(V))
+                elif areaof_ == 3:
+                    l = float(input('What is the leangth of your pyramids base: '))
+                    w = float(input('What is the width of your pyramids base: '))
+                    h = float(input('What is the hight of your pyramid: '))
+                    SA = l*w*m.sqrt((w/2)**2+h**2)+w*m.sqrt((l/2)**2+h**2)
+                    V=(l*w*h)/3
+                    print(SA)
+                    print(V)
                 elif areaof_ == 4:
                     r = float(input('What is the radius: '))
                     h = float(input('What is the hight: '))
@@ -282,8 +309,16 @@ while 'y' in repeat:
                     area = (pi*rs)+(pi*r*l)
                     print(l)
                     print('The Surface area of your cone is '+str(area))
-                    v = pi*r2*(h/3)
+                    v = pi*rs*(h/3)
                     print('The volume of your cone is '+str(v))
+                elif areaof_ == 5:
+                    r = float(input('What is the radius of your sphere: '))
+                    pi = 3.14159265359
+                    SA = 4*pi*r**2
+                    print(SA)
+                    V = 4/3*pi*r**3
+                    print(V)
+                    
     elif 'evaluate' in numprob:
         problem = input("Enter your expression: ")
         result = evaluate_expression(problem)

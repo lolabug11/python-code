@@ -216,8 +216,11 @@ while 'y' in repeat:
                     highmid = data[highmid]
                     lowmid = data[lowmid]
                     mid = (highmid + lowmid)/2
-                    print(mid)
-#C10H15N
+                    data = list(mid.keys())
+                    data.sort()
+                    sd = {i: d[i] for i in myKeys}
+                    
+                    print('The median of ' +str(sd)+ ' is '+str(mid))
                 elif aod % 2 != 0:
                     mid = aod/2
                     mid = m.ceil(mid)
@@ -254,7 +257,42 @@ while 'y' in repeat:
             else:
                 print('Invalid input')
 
-
+        elif maththing == 14:
+            areaof_ = int(input('What type of figure do you want to find the area of\n1 for 2d\n2 for 3d\nEnter your decision: '))
+            if areaof_ == 1:
+                areaof_ = int(input('What shape do you want to fiind the area of\n1 for square\n2 for rectangle\n3 for triangle\nEnter your disicion: '))
+                if areaof_ == 1:
+                    side1 = float(input('What is the leangth of 1 side of your square: '))
+                    area = side1**2
+                    print('The area of your square is '+str(area))
+            else:
+                areaof_ = int(input('What shape do you want to fiind the area of\n1 for cube\n2 for prism\n3 for pyrimid\n4 for cone\nEnter your disicion: '))
+                if areaof_ == 1:
+                    side = float(input('What is a side of your cube: '))
+                    area = 6*side**2
+                    print('The area of your cube is '+str(area))
+                elif areaof_ == 4:
+                    r = float(input('What is the radius: '))
+                    h = float(input('What is the hight: '))
+                    hs = h**2
+                    rs = r**2
+                    pi = 3.14159265359
+                    l = m.sqrt(rs+hs)
+                    b = pi*rs
+                    
+                    # # print(slanthight)
+                    # # # area = 3.14*r*(r+ m.sqrt(h2+r2))
+                    # # # area = (3.14*rtwo)+(3.14*r*h)
+                    # # # area = 3.14*r*slanthight
+                    # L = pi*r*m.sqrt(rs+hs)
+                    # # # area = (pi*r*s) + (pi *rs)
+                    # area = b + L
+                    #pi r ^2 + prl
+                    # S = pi*r*s
+                    # area = S + b
+                    area = (pi*rs)+(pi*r*l)
+                    
+                    print('The area of your cone is '+str(area))
     elif 'evaluate' in numprob:
         problem = input("Enter your expression: ")
         result = evaluate_expression(problem)

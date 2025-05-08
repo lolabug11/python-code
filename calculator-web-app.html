@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Python Calculator</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --secondary-dark: #27ae60;
+            --dark: #34495e;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            flex: 1;
+        }
+        
+        .calculator-container {
+            flex: 1;
+            min-width: 320px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .title-bar {
+            background-color: var(--dark);
+            color: white;
+            padding: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .calculator {
+            padding: 20px;
+        }
+        
+        .display {
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 24px;
+            min-height: 30px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .history {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 5px;
+            min-height: 20px;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        button {
+            padding: 15px 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            background: #f1f1f1;
+            transition: background 0.2s, transform 0.1s;
+        }
+        
+        button:hover {
+            background: #e1e1e1;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        .operator {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .operator:hover {
+            background: var(--primary-dark);
+        }
+        
+        .equals {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .equals:hover {
+            background: var(--secondary-dark);
+        }
+        
+        .clear {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .clear:hover {
+            background: #c0392b;
+        }
+        
+        .function {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .function:hover {
+            background: #2c3e50;
+        }
+        
+        .extra-functions {
+            flex: 1;
+            min-width: 320px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .function-selector {
+            padding: 20px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .function-panel {
+            padding: 0 20px 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .result-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .result-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced Python Calculator</h1>
+            <p>All your calculator features, now on the web!</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Basic Calculator Section -->
+            <div class="calculator-container">
+                <div class="title-bar">Standard Calculator</div>
+                <div class="calculator">
+                    <div class="history" id="history"></div>
+                    <div class="display" id="display"></div>
+                    <div class="buttons">
+                        <button class="clear" onclick="clearDisplay()">C</button>
+                        <button onclick="appendToDisplay('(')">(</button>
+                        <button onclick="appendToDisplay(')')">)</button>
+                        <button class="operator" onclick="appendToDisplay('/')">/</button>
+                        
+                        <button onclick="appendToDisplay('7')">7</button>
+                        <button onclick="appendToDisplay('8')">8</button>
+                        <button onclick="appendToDisplay('9')">9</button>
+                        <button class="operator" onclick="appendToDisplay('*')">×</button>
+                        
+                        <button onclick="appendToDisplay('4')">4</button>
+                        <button onclick="appendToDisplay('5')">5</button>
+                        <button onclick="appendToDisplay('6')">6</button>
+                        <button class="operator" onclick="appendToDisplay('-')">-</button>
+                        
+                        <button onclick="appendToDisplay('1')">1</button>
+                        <button onclick="appendToDisplay('2')">2</button>
+                        <button onclick="appendToDisplay('3')">3</button>
+                        <button class="operator" onclick="appendToDisplay('+')">+</button>
+                        
+                        <button onclick="appendToDisplay('0')">0</button>
+                        <button onclick="appendToDisplay('.')">.</button>
+                        <button class="function" onclick="appendToDisplay('**')">^</button>
+                        <button class="equals" onclick="calculate()">=</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Extra Functions Section -->
+            <div class="extra-functions">
+                <div class="title-bar">Extra Functions</div>
+                <div class="function-selector">
+                    <select id="functionSelect" onchange="showFunctionInputs()">
+                        <option value="" selected disabled>Select a function...</option>
+                        <option value="decimal-to-fraction">Decimal to Fraction</option>
+                        <option value="fraction-to-decimal">Fraction to Decimal</option>
+                        <option value="factorial">Factorial</option>
+                        <option value="fibonacci">Fibonacci Sequence</option>
+                        <option value="exponents">Exponents</option>
+                        <option value="percent">Percent of Number</option>
+                        <option value="pythagorean">Pythagorean Theorem</option>
+                        <option value="emc2">E=MC²</option>
+                        <option value="binary">Binary Converter</option>
+                        <option value="percent-chance">Percent Chance in Words</option>
+                        <option value="unit-conversion">Unit Conversion</option>
+                        <option value="unit-rate">Unit Rate</option>
+                        <option value="center-of-middle">Center of Middle</option>
+                    </select>
+                </div>
+                
+                <!-- Function input panels -->
+                <div id="functionPanels">
+                    <!-- Decimal to Fraction -->
+                    <div class="function-panel" id="decimal-to-fraction" style="display: none;">
+                        <div class="input-group">
+                            <label for="decimal-input">Enter decimal:</label>
+                            <input type="number" id="decimal-input" step="0.000001">
+                        </div>
+                        <button class="btn" onclick="decimalToFraction()">Convert</button>
+                        <div class="result-panel" id="decimal-to-fraction-result">
+                            <div class="result-title">Result:</div>
+                            <div id="decimal-to-fraction-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fraction to Decimal -->
+                    <div class="function-panel" id="fraction-to-decimal" style="display: none;">
+                        <div class="input-group">
+                            <label for="numerator-input">Numerator:</label>
+                            <input type="number" id="numerator-input">
+                        </div>
+                        <div class="input-group">
+                            <label for="denominator-input">Denominator:</label>
+                            <input type="number" id="denominator-input">
+                        </div>
+                        <button class="btn" onclick="fractionToDecimal()">Convert</button>
+                        <div class="result-panel" id="fraction-to-decimal-result">
+                            <div class="result-title">Result:</div>
+                            <div id="fraction-to-decimal-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Factorial -->
+                    <div class="function-panel" id="factorial" style="display: none;">
+                        <div class="input-group">
+                            <label for="factorial-input">Enter number:</label>
+                            <input type="number" id="factorial-input" min="0" max="170">
+                        </div>
+                        <button class="btn" onclick="calculateFactorial()">Calculate</button>
+                        <div class="result-panel" id="factorial-result">
+                            <div class="result-title">Result:</div>
+                            <div id="factorial-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fibonacci -->
+                    <div class="function-panel" id="fibonacci" style="display: none;">
+                        <div class="input-group">
+                            <label for="fibonacci-input">How many numbers:</label>
+                            <input type="number" id="fibonacci-input" min="1" max="100">
+                        </div>
+                        <button class="btn" onclick="calculateFibonacci()">Generate</button>
+                        <div class="result-panel" id="fibonacci-result">
+                            <div class="result-title">Fibonacci Sequence:</div>
+                            <div id="fibonacci-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Exponents -->
+                    <div class="function-panel" id="exponents" style="display: none;">
+                        <div class="input-group">
+                            <label for="base-input">Base:</label>
+                            <input type="number" id="base-input" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label for="power-input">Power:</label>
+                            <input type="number" id="power-input">
+                        </div>
+                        <button class="btn" onclick="calculateExponent()">Calculate</button>
+                        <div class="result-panel" id="exponents-result">
+                            <div class="result-title">Result:</div>
+                            <div id="exponents-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Percent of Number -->
+                    <div class="function-panel" id="percent" style="display: none;">
+                        <div class="input-group">
+                            <label for="main-number">Number:</label>
+                            <input type="number" id="main-number" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label for="percent-value">Percent:</label>
+                            <input type="number" id="percent-value" min="0" max="100">
+                        </div>
+                        <button class="btn" onclick="calculatePercent()">Calculate</button>
+                        <div class="result-panel" id="percent-result">
+                            <div class="result-title">Result:</div>
+                            <div id="percent-value-result"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pythagorean Theorem -->
+                    <div class="function-panel" id="pythagorean" style="display: none;">
+                        <div class="input-group">
+                            <label for="side-a">Side A:</label>
+                            <input type="number" id="side-a" step="0.01" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="side-b">Side B:</label>
+                            <input type="number" id="side-b" step="0.01" min="0">
+                        </div>
+                        <button class="btn" onclick="calculatePythagorean()">Calculate Hypotenuse</button>
+                        <div class="result-panel" id="pythagorean-result">
+                            <div class="result-title">Hypotenuse (Side C):</div>
+                            <div id="pythagorean-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- E=MC² -->
+                    <div class="function-panel" id="emc2" style="display: none;">
+                        <div class="input-group">
+                            <label for="mass-input">Mass (in grams):</label>
+                            <input type="number" id="mass-input" step="0.01" min="0">
+                        </div>
+                        <button class="btn" onclick="calculateEnergy()">Calculate Energy</button>
+                        <div class="result-panel" id="emc2-result">
+                            <div class="result-title">Energy (in Joules):</div>
+                            <div id="emc2-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Binary Converter -->
+                    <div class="function-panel" id="binary" style="display: none;">
+                        <div class="input-group">
+                            <label for="binary-conversion-type">Conversion:</label>
+                            <select id="binary-conversion-type">
+                                <option value="bin-to-int">Binary to Integer</option>
+                                <option value="int-to-bin">Integer to Binary</option>
+                            </select>
+                        </div>
+                        <div class="input-group" id="binary-input-group">
+                            <label for="binary-input">Binary:</label>
+                            <input type="text" id="binary-input" pattern="[01]*">
+                        </div>
+                        <div class="input-group" id="integer-input-group" style="display: none;">
+                            <label for="integer-input">Integer:</label>
+                            <input type="number" id="integer-input" min="0">
+                        </div>
+                        <button class="btn" onclick="convertBinary()">Convert</button>
+                        <div class="result-panel" id="binary-result">
+                            <div class="result-title">Result:</div>
+                            <div id="binary-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Percent Chance in Words -->
+                    <div class="function-panel" id="percent-chance" style="display: none;">
+                        <div class="input-group">
+                            <label for="percent-decimal">Percent as decimal:</label>
+                            <input type="number" id="percent-decimal" step="0.01" min="0" max="1">
+                        </div>
+                        <button class="btn" onclick="calculatePercentChance()">Convert</button>
+                        <div class="result-panel" id="percent-chance-result">
+                            <div class="result-title">Result:</div>
+                            <div id="percent-chance-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit Conversion -->
+                    <div class="function-panel" id="unit-conversion" style="display: none;">
+                        <div class="input-group">
+                            <label for="conversion-type">Conversion Type:</label>
+                            <select id="conversion-type" onchange="updateConversionOptions()">
+                                <option value="length">Length</option>
+                                <option value="weight">Weight/Mass</option>
+                                <option value="temperature">Temperature</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="conversion-direction">Direction:</label>
+                            <select id="conversion-direction" onchange="updateConversionLabels()">
+                                <option value="to-metric">Customary to Metric</option>
+                                <option value="to-customary">Metric to Customary</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label id="conversion-input-label" for="conversion-input">Inches:</label>
+                            <input type="number" id="conversion-input" step="0.01">
+                        </div>
+                        <button class="btn" onclick="convertUnits()">Convert</button>
+                        <div class="result-panel" id="unit-conversion-result">
+                            <div class="result-title">Result:</div>
+                            <div id="unit-conversion-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit Rate -->
+                    <div class="function-panel" id="unit-rate" style="display: none;">
+                        <div class="input-group">
+                            <label for="unit-rate-known">What do you know:</label>
+                            <select id="unit-rate-known" onchange="updateUnitRateInputs()">
+                                <option value="k-and-y">k and y</option>
+                                <option value="k-and-x">k and x</option>
+                                <option value="y-and-x">y and x</option>
+                            </select>
+                        </div>
+                        <div id="unit-rate-inputs">
+                            <div class="input-group" id="k-input-group">
+                                <label for="k-input">k value:</label>
+                                <input type="number" id="k-input" step="0.01">
+                            </div>
+                            <div class="input-group" id="y-input-group">
+                                <label for="y-input">y value:</label>
+                                <input type="number" id="y-input" step="0.01">
+                            </div>
+                            <div class="input-group" id="x-input-group" style="display: none;">
+                                <label for="x-input">x value:</label>
+                                <input type="number" id="x-input" step="0.01">
+                            </div>
+                        </div>
+                        <button class="btn" onclick="calculateUnitRate()">Calculate</button>
+                        <div class="result-panel" id="unit-rate-result">
+                            <div class="result-title">Result:</div>
+                            <div id="unit-rate-value"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Center of Middle -->
+                    <div class="function-panel" id="center-of-middle" style="display: none;">
+                        <div class="input-group">
+                            <label for="center-type">Type:</label>
+                            <select id="center-type">
+                                <option value="mean">Mean</option>
+                                <option value="median">Median</option>
+                                <option value="mode">Mode</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="data-count">Number of data points:</label>
+                            <input type="number" id="data-count" min="1" max="100">
+                        </div>
+                        <div class="input-group">
+                            <label for="data-points">Enter data points (comma separated):</label>
+                            <input type="text" id="data-points" placeholder="Example: 5, 10, 15, 20">
+                        </div>
+                        <button class="btn" onclick="calculateCenterOfMiddle()">Calculate</button>
+                        <div class="result-panel" id="center-of-middle-result">
+                            <div class="result-title">Result:</div>
+                            <div id="center-of-middle-value"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Your Advanced Python Calculator - Web Version &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // Global variables
+        let currentResult = 0;
+        let history = [];
+        
+        // Basic Calculator Functions
+        function appendToDisplay(value) {
+            document.getElementById('display').innerHTML += value;
+        }
+        
+        function clearDisplay() {
+            document.getElementById('display').innerHTML = '';
+            document.getElementById('history').innerHTML = '';
+        }
+        
+        function calculate() {
+            try {
+                const expression = document.getElementById('display').innerHTML;
+                
+                // Validate expression using regex (similar to your Python function)
+                if (!isValidExpression(expression)) {
+                    throw new Error("Invalid expression: contains illegal characters.");
+                }
+                
+                // Use JavaScript's eval to calculate the result
+                const result = eval(expression.replace("^", "**"));
+                
+                // Update history
+                document.getElementById('history').innerHTML = expression;
+                
+                // Display result
+                document.getElementById('display').innerHTML = result;
+                
+                // Store result for later use
+                currentResult = result;
+                
+            } catch (error) {
+                document.getElementById('display').innerHTML = 'Error';
+                setTimeout(() => {
+                    document.getElementById('display').innerHTML = '';
+                }, 1500);
+            }
+        }
+        
+        // Validate expressions similar to your Python function
+        function isValidExpression(expr) {
+            // Allow digits, operators, and common math symbols
+            return /^[\d+\-*/ ().]+$/.test(expr);
+        }
+        
+        // Function Selector
+        function showFunctionInputs() {
+            // Hide all function panels first
+            const panels = document.querySelectorAll('.function-panel');
+            panels.forEach(panel => {
+                panel.style.display = 'none';
+            });
+            
+            // Show the selected panel
+            const selectedFunction = document.getElementById('functionSelect').value;
+            if (selectedFunction) {
+                const panel = document.getElementById(selectedFunction);
+                if (panel) {
+                    panel.style.display = 'block';
+                } else {
+                    console.error(`Panel with ID ${selectedFunction} not found`);
+                }
+            }
+            
+            // Special case for binary converter
+            if (selectedFunction === 'binary') {
+                updateBinaryInputs();
+            }
+        }
+        
+        // Update binary converter input fields based on selected conversion type
+        function updateBinaryInputs() {
+            const conversionType = document.getElementById('binary-conversion-type').value;
+            document.getElementById('binary-input-group').style.display = 
+                conversionType === 'bin-to-int' ? 'block' : 'none';
+            document.getElementById('integer-input-group').style.display = 
+                conversionType === 'int-to-bin' ? 'block' : 'none';
+        }
+        
+        // Set up event listener for binary conversion type changes
+        document.getElementById('binary-conversion-type')?.addEventListener('change', updateBinaryInputs);
+        
+        // Decimal to Fraction
+        function decimalToFraction() {
+            const decimal = parseFloat(document.getElementById('decimal-input').value);
+            if (isNaN(decimal)) {
+                alert("Please enter a valid decimal number");
+                return;
+            }
+            
+            // Simple fraction approximation (similar to Python's Fraction)
+            const fraction = approximateFraction(decimal);
+            document.getElementById('decimal-to-fraction-value').textContent = `${fraction[0]}/${fraction[1]}`;
+            document.getElementById('decimal-to-fraction-result').style.display = 'block';
+        }
+        
+        // Simple function to approximate a decimal as a fraction
+        function approximateFraction(decimal, tolerance = 1.0e-6) {
+            const sign = decimal < 0 ? -1 : 1;
+            decimal = Math.abs(decimal);
+            
+            // Handle simple cases
+            if (Math.abs(decimal - Math.round(decimal)) < tolerance) {
+                return [sign * Math.round(decimal), 1];
+            }
+            
+            let n = 1;
+            while (n < 1000000) {
+                const d = Math.round(n / decimal);
+                if (Math.abs(decimal - n / d) < tolerance) {
+                    return [sign * n, d];
+                }
+                n++;
+            }
+            
+            // Fall back to a simple approximation
+            const maxDenominator = 1000;
+            let bestNumerator = 1;
+            let bestDenominator = 1;
+            let bestError = Math.abs(decimal - 1);
+            
+            for (let d = 1; d <= maxDenominator; d++) {
+                const n = Math.round(decimal * d);
+                const error = Math.abs(decimal - n / d);
+                
+                if (error < bestError) {
+                    bestNumerator = n;
+                    bestDenominator = d;
+                    bestError = error;
+                    
+                    if (error < tolerance) {
+                        break;
+                    }
+                }
+            }
+            
+            return [sign * bestNumerator, bestDenominator];
+        }
+        
+        // Fraction to Decimal
+        function fractionToDecimal() {
+            const numerator = parseInt(document.getElementById('numerator-input').value);
+            const denominator = parseInt(document.getElementById('denominator-input').value);
+            
+            if (isNaN(numerator) || isNaN(denominator) || denominator === 0) {
+                alert("Please enter valid numbers. Denominator cannot be zero.");
+                return;
+            }
+            
+            const result = numerator / denominator;
+            document.getElementById('fraction-to-decimal-value').textContent = result;
+            document.getElementById('fraction-to-decimal-result').style.display = 'block';
+        }
+        
+        // Factorial
+        function calculateFactorial() {
+            const num = parseInt(document.getElementById('factorial-input').value);
+            
+            if (isNaN(num) || num < 0) {
+                alert("Please enter a non-negative integer");
+                return;
+            }
+            
+            let result;
+            try {
+                result = factorial(num);
+                document.getElementById('factorial-value').textContent = result;
+                document.getElementById('factorial-result').style.display = 'block';
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+        
+        function factorial(n) {
+            if (n < 0) {
+                throw new Error("Factorial is not defined for negative numbers");
+            } else if (n === 0) {
+                return 1;
+            } else {
+                // To prevent stack overflow for large numbers
+                if (n > 170) { // JavaScript's limit for reliable factorial calculations
+                    throw new Error("Number too large for calculation");
+                }
+                return n * factorial(n - 1);
+            }
+        }
+        
+        // Fibonacci
+        function calculateFibonacci() {
+            const count = parseInt(document.getElementById('fibonacci-input').value);
+            
+            if (isNaN(count) || count < 1) {
+                alert("Please enter a positive integer");
+                return;
+            }
+            
+            let sequence = [1, 1];
+            while (sequence.length < count) {
+                sequence.push(sequence[sequence.length - 1] + sequence[sequence.length - 2]);
+            }
+            
+            document.getElementById('fibonacci-value').textContent = sequence.slice(0, count).join(", ");
+            document.getElementById('fibonacci-result').style.display = 'block';
+        }
+        
+        // Exponents
+        function calculateExponent() {
+            const base = parseFloat(document.getElementById('base-input').value);
+            const power = parseInt(document.getElementById('power-input').value);
+            
+            if (isNaN(base) || isNaN(power)) {
+                alert("Please enter valid numbers");
+                return;
+            }
+            
+            const result = Math.pow(base, power);
+            
+            // Also calculate fraction representation like in your Python code
+            const fraction = approximateFraction(result);
+            
+            document.getElementById('exponents-value').textContent = 
+                `${result} and as a fraction ${fraction[0]}/${fraction[1]}`;
+            document.getElementById('exponents-result').style.display = 'block';
+        }
+        
+        // Percent of Number
+        function calculatePercent() {
+            const mainNum = parseFloat(document.getElementById('main-number').value);
+            const percentage = parseFloat(document.getElementById('percent-value').value);
+            
+            if (isNaN(mainNum) || isNaN(percentage)) {
+                alert("Please enter valid numbers");
+                return;
+            }
+            
+            const result = mainNum * (percentage / 100);
+            document.getElementById('percent-value-result').textContent = result;
+            document.getElementById('percent-result').style.display = 'block';
+        }
+        
+        // Pythagorean Theorem
+        function calculatePythagorean() {
+            const sideA = parseFloat(document.getElementById('side-a').value);
+            const sideB = parseFloat(document.getElementById('side-b').value);
+            
+            if (isNaN(sideA) || isNaN(sideB) || sideA < 0 || sideB < 0) {
+                alert("Please enter valid positive numbers for sides");
+                return;
+            }
+            
+            const hypotenuse = Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
+            document.getElementById('pythagorean-value').textContent = hypotenuse;
+            document.getElementById('pythagorean-result').style.display = 'block';
+        }
+        
+        // E=MC²
+        function calculateEnergy() {
+            const mass = parseFloat(document.getElementById('mass-input').value);
+            
+            if (isNaN(mass) || mass < 0) {
+                alert("Please enter a valid mass value");
+                return;
+            }
+            
+            // Speed of light squared in m²/s²
+            const c = 89875517873681760; // matches your Python code
+            const energy = mass * c;
+            
+            // Format large number with scientific notation
+            const formattedEnergy = energy.toExponential(6);
+            
+            // Approximate as fraction
+            const fraction = approximateFraction(energy);
+            const fractionStr = (fraction[1] === 1) ? 
+                  fraction[0].toString() : 
+                  `${fraction[0]}/${fraction[1]}`;
+            
+            document.getElementById('emc2-value').textContent = 
+                `${formattedEnergy} J (${fractionStr})`;
+            document.getElementById('emc2-result').style.display = 'block';
+        }
+        
+        // Binary Converter
+        function convertBinary() {
+            const conversionType = document.getElementById('binary-conversion-type').value;
+            let result;
+            
+            if (conversionType === 'bin-to-int') {
+                const binary = document.getElementById('binary-input').value.trim();
+                
+                if (!/^[01]+$/.test(binary)) {
+                    alert("Please enter a valid binary number (only 0s and 1s)");
+                    return;
+                }
+                
+                result = parseInt(binary, 2);
+                document.getElementById('binary-value').textContent = 
+                    `${binary} in integer form is ${result}`;
+                
+            } else { // int-to-bin
+                const integer = parseInt(document.getElementById('integer-input').value);
+                
+                if (isNaN(integer) || integer < 0) {
+                    alert("Please enter a valid positive integer");
+                    return;
+                }
+                
+                result = integer.toString(2);
+                document.getElementById('binary-value').textContent = 
+                    `Your number in binary is ${result}`;
+            }
+            
+            document.getElementById('binary-result').style.display = 'block';
+        }
+        
+        // Percent Chance in Words
+        function calculatePercentChance() {
+            const decimal = parseFloat(document.getElementById('percent-decimal').value);
+            
+            if (isNaN(decimal) || decimal < 0 || decimal > 1) {
+                alert("Please enter a valid decimal between 0 and 1");
+                return;
+            }
+            
+            const percent = decimal * 100;
+            // Approximate fraction similar to your Python code
+            const fraction = approximateFraction(decimal);
+            
+            document.getElementById('percent-chance-value').textContent = 
+                `${fraction[0]} in ${fraction[1]} (${percent}%)`;
+            document.getElementById('percent-chance-result').style.display = 'block';
+        }
+        
+        // Unit Conversion
+        function updateConversionOptions() {
+            updateConversionLabels();
+        }
+        
+        function updateConversionLabels() {
+            const conversionType = document.getElementById('conversion-type').value;
+            const direction = document.getElementById('conversion-direction').value;
+            const label = document.getElementById('conversion-input-label');
+            
+            if (conversionType === 'length') {
+                label.textContent = direction === 'to-metric' ? 'Inches:' : 'Centimeters:';
+            } else if (conversionType === 'weight') {
+                label.textContent = direction === 'to-metric' ? 'Pounds:' : 'Grams:';
+            } else if (conversionType === 'temperature') {
+                label.textContent = direction === 'to-metric' ? 'Fahrenheit:' : 'Celsius:';
+            }
+        }
+        
+        function convertUnits() {
+            const value = parseFloat(document.getElementById('conversion-input').value);
+            const conversionType = document.getElementById('conversion-type').value;
+            const direction = document.getElementById('conversion-direction').value;
+            
+            if (isNaN(value)) {
+                alert("Please enter a valid number");
+                return;
+            }
+            
+            let result, resultText;
+            
+            if (conversionType === 'length') {
+                if (direction === 'to-metric') {
+                    result = value * 2.54;
+                    resultText = `${value} in is ${result} cm`;
+                } else {
+                    result = value / 2.54;
+                    resultText = `${value} cm is ${result} in`;
+                }
+            } else if (conversionType === 'weight') {
+                if (direction === 'to-metric') {
+                    result = value / 2.20462;
+                    resultText = `${value} pound(s) is ${result} kilogram(s)`;
+                } else {
+                    result = value / 453.592;
+                    resultText = `${value} gram(s) is ${result} pound(s)`;
+                }
+            } else if (conversionType === 'temperature') {
+                if (direction === 'to-metric') {
+                    result = (value - 32) * (5/9);
+                    resultText = `${value}° F is ${result}° C`;
+                } else {
+                    result = (value * 1.8) + 32;
+                    resultText = `${value}° C is ${result}° F`;
+                }
+            }
+            
+            document.getElementById('unit-conversion-value').textContent = resultText;
+            document.getElementById('unit-conversion-result').style.display = 'block';
+        }
+        
+        // Unit Rate
+        function updateUnitRateInputs() {
+            const known = document.getElementById('unit-rate-known').value;
+            
+            document.getElementById('k-input-group').style.display = 
+                (known === 'k-and-y' || known === 'k-and-x') ? 'block' : 'none';
+            document.getElementById('y-input-group').style.display = 
+                (known === 'k-and-y' || known === 'y-and-x') ? 'block' : 'none';
+            document.getElementById('x-input-group').style.display = 
+                (known === 'k-and-x' || known === 'y-and-x') ? 'block' : 'none';
+        }
+        
+        function calculateUnitRate() {
+            const known = document.getElementById('unit-rate-known').value;
+            let k, y, x, result, resultText;
+            
+            if (known === 'k-and-y') {
+                k = parseFloat(document.getElementById('k-input').value);
+                y = parseFloat(document.getElementById('y-input').value);
+                
+                if (isNaN(k) || isNaN(y)) {
+                    alert("Please enter valid numbers");
+                    return;
+                }
+                
+                x = y / k;
+                resultText = `x = ${x}`;
+                
+            } else if (known === 'k-and-x') {
+                k = parseFloat(document.getElementById('k-input').value);
+                x = parseFloat(document.getElementById('x-input').value);
+                
+                if (isNaN(k) || isNaN(x)) {
+                    alert("Please enter valid numbers");
+                    return;
+                }
+                
+                y = k * x;
+                resultText = `y = ${y}`;
+                
+            } else if (known === 'y-and-x') {
+                y = parseFloat(document.getElementById('y-input').value);
+                x = parseFloat(document.getElementById('x-input').value);
+                
+                if (isNaN(y) || isNaN(x)) {
+                    alert("Please enter valid numbers");
+                    return;
+                }
+                
+                if (x === 0) {
+                    alert("x cannot be zero for this calculation");
+                    return;
+                }
+                
+                k = y / x;
+                resultText = `k = ${k}`;
+            }
+            
+            document.getElementById('unit-rate-value').textContent = resultText;
+            document.getElementById('unit-rate-result').style.display = 'block';
+        }
+        
+        // Center of Middle
+        function calculateCenterOfMiddle() {
+            const type = document.getElementById('center-type').value;
+            const dataPoints = document.getElementById('data-points').value
+                .split(',')
+                .map(point => parseFloat(point.trim()))
+                .filter(point => !isNaN(point));
+            
+            if (dataPoints.length === 0) {
+                alert("Please enter valid data points");
+                return;
+            }
+            
+            let result, resultText;
+            
+            if (type === 'mean') {
+                const sum = dataPoints.reduce((total, value) => total + value, 0);
+                result = sum / dataPoints.length;
+                resultText = `The mean of your data set is ${result}`;
+                
+            } else if (type === 'median') {
+                const sortedData = [...dataPoints].sort((a, b) => a - b);
+                
+                if (sortedData.length % 2 === 0) {
+                    // Even number of elements
+                    const midUpper = sortedData[sortedData.length / 2];
+                    const midLower = sortedData[(sortedData.length / 2) - 1];
+                    result = (midUpper + midLower) / 2;
+                } else {
+                    // Odd number of elements
+                    result = sortedData[Math.floor(sortedData.length / 2)];
+                }
+                
+                resultText = `The median of your data set is ${result}`;
+                
+            } else if (type === 'mode') {
+                // Count occurrences
+                const counts = {};
+                dataPoints.forEach(point => {
+                    counts[point] = (counts[point] || 0) + 1;
+                });
+                
+                // Find the maximum frequency
+                let maxFreq = 0;
+                for (const count in counts) {
+                    if (counts[count] > maxFreq) {
+                        maxFreq = counts[count];
+                    }
+                }
+                
+                // Find all values with maximum frequency
+                const modes = [];
+                for (const value in counts) {
+                    if (counts[value] === maxFreq) {
+                        modes.push(parseFloat(value));
+                    }
+                }
+                
+                if (modes.length === 1) {
+                    resultText = `The mode of your data set is ${modes[0]}`;
+                } else if (modes.length === dataPoints.length) {
+                    resultText = "No mode found (all values appear equally often)";
+                } else {
+                    resultText = `The modes of your data set are ${modes.join(', ')}`;
+                }
+            }
+            
+            document.getElementById('center-of-middle-value').textContent = resultText;
+            document.getElementById('center-of-middle-result').style.display = 'block';
+        }
+        
+        // Add event listeners for all dynamic elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Binary converter
+            const binaryConversionType = document.getElementById('binary-conversion-type');
+            if (binaryConversionType) {
+                binaryConversionType.addEventListener('change', updateBinaryInputs);
+            }
+            
+            // Unit conversion
+            const conversionType = document.getElementById('conversion-type');
+            const conversionDirection = document.getElementById('conversion-direction');
+            if (conversionType) {
+                conversionType.addEventListener('change', updateConversionOptions);
+            }
+            if (conversionDirection) {
+                conversionDirection.addEventListener('change', updateConversionLabels);
+            }
+            
+            // Unit rate
+            const unitRateKnown = document.getElementById('unit-rate-known');
+            if (unitRateKnown) {
+                unitRateKnown.addEventListener('change', updateUnitRateInputs);
+            }
+        });
+    </script>
+</body>
+</html>

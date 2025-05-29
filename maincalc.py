@@ -5,6 +5,9 @@ import re
 from collections import Counter
 extrarepeat= {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,13:0,14:0,15:0,16:0,17:0,18:0,19:0,}
 ans = 0
+def log(b, s):
+    ans = m.log(s)/m.log(b)
+    return mumceil(ans)
 def is_valid_expression(expr):
         #Allow digits, operators, and whitespace
     return bool(re.fullmatch(r'[\d+\-*/ ().ans]+|\*\*', expr))
@@ -35,7 +38,7 @@ while 'y' in repeat:
     numprob = numprob.lower()
 
     if 'extra' in numprob:
-        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\nEnter your decision: '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\n15 for logarims\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -318,6 +321,12 @@ while 'y' in repeat:
                     print(SA)
                     V = 4/3*pi*r**3
                     print(V)
+        elif maththing == 15:
+            base = float(input('What is the base of your logarithm: '))
+            subject = float(input('What is the subject of your logarithm: '))
+            ans = log(base, subject)
+            print(f'log_{base}({subject}) = {ans}')
+            
                     
     elif 'evaluate' in numprob:
         problem = input("Enter your expression: ")
@@ -325,7 +334,7 @@ while 'y' in repeat:
         ans = result
         print(f"{problem} = {result}")
     elif 'corn' in numprob:
-        print('"Your that type of guy" - Jack Ford')
+        print('"You're that type of guy" - Jack Ford')
     elif 'will' in numprob:
         print('Midget')
     elif 'jack' in numprob:

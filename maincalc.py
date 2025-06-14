@@ -7,7 +7,7 @@ extrarepeat= {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,13:0,14:0,15:0,16:0,
 ans = 0
 def log(b, s):
     ans = m.log(s)/m.log(b)
-    return mumceil(ans)
+    return m.ceil(ans)
 def is_valid_expression(expr):
         #Allow digits, operators, and whitespace
     return bool(re.fullmatch(r'[\d+\-*/ ().ans]+|\*\*', expr))
@@ -38,7 +38,7 @@ while 'y' in repeat:
     numprob = numprob.lower()
 
     if 'extra' in numprob:
-        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\n15 for logarims\nEnter your decision: '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\n15 for logarims\n16 for tax or tip\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -326,6 +326,20 @@ while 'y' in repeat:
             subject = float(input('What is the subject of your logarithm: '))
             ans = log(base, subject)
             print(f'log_{base}({subject}) = {ans}')
+        elif maththing == 16:
+            taorti= input('Do you want to calculate tax or tip: ')
+            if 'tax' in taorti.lower():
+                tax_rate = float(input('What is the tax rate in your area: '))
+                total_amount = float(input('What is the total amount that you want to add tax to: '))
+                total_amount_after = (tax_rate * total_amount) + total_amount
+                print(f'{total_amount} with the tax rate of {tax_rate} is {total_amount_after}.')
+            elif 'tip' in taorti.lower():
+                tip_rate = float(input('What percent tip do you want to leave: '))
+                total_amount = float(input('What is the total amount that you want to add tip to: '))
+                total_amount_after = (1 + (tip_rate / 100)) * total_amount
+                print(f'The total amount of {total_amount} with a tip percent of {tip_rate} is {total_amount_after}')
+            else:
+                print('Error. You need to input eny version of "tax or "tip"')
             
                     
     elif 'evaluate' in numprob:
@@ -334,7 +348,7 @@ while 'y' in repeat:
         ans = result
         print(f"{problem} = {result}")
     elif 'corn' in numprob:
-        print('"You're that type of guy" - Jack Ford')
+        print("You're that type of guy - Jack Ford")
     elif 'will' in numprob:
         print('Midget')
     elif 'jack' in numprob:

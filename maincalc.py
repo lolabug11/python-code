@@ -38,7 +38,7 @@ while 'y' in repeat:
     numprob = numprob.lower()
 
     if 'extra' in numprob:
-        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\n15 for logarims\n16 for tax or tip\nEnter your decision: '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\n15 for logarims\n16 for tax or tip\n17 for triganomtiy functions\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -164,7 +164,7 @@ while 'y' in repeat:
                     c = float(input('How many °C: '))
                     f = (c*1.8)+32
                     print(str(c)+'°C is ' +str(f)+'° F')
-        elif maththing == 12:
+        elif maththing == 12: 
             #y=kx
 
             known = int(input('What do you know\n1 k and y\n2 k and x\n3 y and x\nEnter your decision: '))
@@ -203,35 +203,7 @@ while 'y' in repeat:
                 mean = add/ifi
                 print('The mean of your data set is '+str(mean))
             elif type == 2:
-                aod = int(input('How many data points are in your data set: '))
-                i = aod
-                e = 1
-                data = {}
-                if aod % 2 == 0:
-                    lowmid = aod/2
-                    lowmid = m.floor(lowmid)
-                    highmid = aod/2
-                    highmid += 1
-                    while i > 0:
-                        data[e] = float(input('What is your data point (from lowest to highest): '))
-                        i -= 1
-                        e += 1
-                    highmid = data[highmid]
-                    lowmid = data[lowmid]
-                    mid = (highmid + lowmid)/2
-                    data = list(mid.keys())
-                    data.sort()
-                    sd = {i: d[i] for i in myKeys}
-                    
-                    print('The median of ' +str(sd)+ ' is '+str(mid))
-                elif aod % 2 != 0:
-                    mid = aod/2
-                    mid = m.ceil(mid)
-                    while i > 0:
-                        data[e] = float(input('What is your data point (from lowest to highest): '))
-                        i -= 1
-                        e += 1
-                    print(data[mid])
+                print('This is not implemented yet. Sorry.')
             elif type == 3:
                 i = int(input('How many numbers are in your data set: '))
                 data = {}
@@ -340,6 +312,13 @@ while 'y' in repeat:
                 print(f'The total amount of {total_amount} with a tip percent of {tip_rate} is {total_amount_after}')
             else:
                 print('Error. You need to input eny version of "tax or "tip"')
+        elif maththing == 17:
+            choice = input('What trig function do you want to use (sin, csc, cos, sec, tan, cot): ')
+            if 'sin' in choice.lower():
+                opposite = float(input('What is the opposite side of your triangle: '))
+                hypotonuce = float(input('What is the hypotonuce of your triangle: '))
+                sin = opposite/hypotonuce
+                print(f'Sin of a triangle with an opposite of {opposite} and a hypotonuce of {hypotonuce} is {sin}')
             
                     
     elif 'evaluate' in numprob:
@@ -359,7 +338,5 @@ while 'y' in repeat:
         timesrepeated+=1
 statyn = input('Do you want to see your stats: ')
 if 'y' in statyn:
-    print('You have repeated the calculator '+str(timesrepeated)+' time(s)')
-    print('You have done each extra feature (feature:times)')
-    print(extrarepeat)
+    print(f'You have repeated the calculator {timesrepeated} times.')
 print('Goodbye!')

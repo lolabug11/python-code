@@ -1,17 +1,19 @@
 matrix_width = int(input('What is the side length of your square matrix? '))
 if matrix_width == 2:
-    ATW = int(input('What is the top right corner of for first 2x2 matrix? '))
     AO = int(input('What is the top left corner of for first 2x2 matrix? '))
+    ATW = int(input('What is the top right corner of for first 2x2 matrix? '))
     ATH = int(input('What is the bottom left corner of for first 2x2 matrix? '))
     AF = int(input('What is the bottom right corner of for first 2x2 matrix? '))
     BO = int(input('What is the top left corner of for second 2x2 matrix? '))
     BTW = int(input('What is the top right corner of for second 2x2 matrix? '))
     BTH = int(input('What is the bottom left corner of for second 2x2 matrix? '))
     BF = int(input('What is the bottom right corner of for second 2x2 matrix? '))
-    CO = AO * BO + ATW * BTH
-    CTW = AO * BTW + ATW * BF
-    CTH = ATH * BO + AF * BTH
-    CF = ATH * BTW + AF * BF
+    a = [AO, ATW, ATH, AF]
+    b = [BO, BTW, BTH, BF]
+    CO = a[0]*b[0]+a[1]*b[2]
+    CTW = a[0]*b[1]+a[1]*b[3]
+    CTH = a[2]*b[0]+a[3]*b[2]
+    CF = a[2]*b[1]+a[3]*b[3]
     C = [
         [CO, CTW],
         [CTH, CF]

@@ -38,7 +38,7 @@ while 'y' in repeat:
     numprob = numprob.lower()
 
     if 'extra' in numprob:
-        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\n15 for logarims\n16 for tax or tip\n17 for triganomtiy functions\nEnter your decision: '))
+        maththing = int(input('1 for Decimal to Fraction\n2 for Fraction to decimal\n3 for factorial\n4 for a fibonacci sequence\n5 for exponents\n6 for a percent of a number\n7 for the pythagorean theorem\n8 for  E=MC^2\n9 for binary converter\n10 for percent chance in words\n11 for unit conversion\n12 for Unit Rate\n13 for Center of Middle\n14 for gemomitry\n15 for logarims\n16 for tax or tip\n17 for matrix multplication\nEnter your decision: '))
         if maththing == 1:
             decimal = float(input('What decimal do you want to into a Fraction: '))
             frac = Fraction(decimal).limit_denominator()
@@ -313,12 +313,73 @@ while 'y' in repeat:
             else:
                 print('Error. You need to input eny version of "tax or "tip"')
         elif maththing == 17:
-            choice = input('What trig function do you want to use (sin, csc, cos, sec, tan, cot): ')
-            if 'sin' in choice.lower():
-                opposite = float(input('What is the opposite side of your triangle: '))
-                hypotonuce = float(input('What is the hypotonuce of your triangle: '))
-                sin = opposite/hypotonuce
-                print(f'Sin of a triangle with an opposite of {opposite} and a hypotonuce of {hypotonuce} is {sin}')
+            matrix_width = int(input('What is the side length of your square matrix? '))
+            if matrix_width == 2:
+                AO = int(input('What is the top left corner of for first 2x2 matrix? '))
+                ATW = int(input('What is the top right corner of for first 2x2 matrix? '))
+                ATH = int(input('What is the bottom left corner of for first 2x2 matrix? '))
+                AF = int(input('What is the bottom right corner of for first 2x2 matrix? '))
+                BO = int(input('What is the top left corner of for second 2x2 matrix? '))
+                BTW = int(input('What is the top right corner of for second 2x2 matrix? '))
+                BTH = int(input('What is the bottom left corner of for second 2x2 matrix? '))
+                BF = int(input('What is the bottom right corner of for second 2x2 matrix? '))
+                a = [AO, ATW, ATH, AF]
+                b = [BO, BTW, BTH, BF]
+                CO = a[0]*b[0]+a[1]*b[2]
+                CTW = a[0]*b[1]+a[1]*b[3]
+                CTH = a[2]*b[0]+a[3]*b[2]
+                CF = a[2]*b[1]+a[3]*b[3]
+                C = [
+                    [CO, CTW],
+                    [CTH, CF]
+                ]
+                for row in C:
+                    print(row)
+            elif matrix_width == 3:
+                AO = int(input('What is the top right corner of for first 3x3 matrix? '))
+                ATW = int(input('What is the top middle of for first 3x3 matrix? '))
+                ATH = int(input('What is the top right corner of for first 3x3 matrix? '))
+                AFO = int(input('What is the middle left corner of for first 3x3 matrix? '))
+                AFI = int(input('What is the middle middle for first 3x3 matrix? '))
+                ASI = int(input('What is the middle right corner of for first 3x3 matrix? '))
+                ASE = int(input('What is the bottom left corner of for first 3x3 matrix? '))
+                AE = int(input('What is the bottom middle of for first 3x3 matrix? '))
+                AN = int(input('What is the bottom right corner of for first 3x3 matrix? '))
+                BO = int(input('What is the top left corner of for second 3x3 matrix? '))
+                BTW = int(input('What is the top middle of for second 3x3 matrix? '))
+                BTH = int(input('What is the top right corner of for second 3x3 matrix? '))
+                BFO = int(input('What is the middle left corner of for second 3x3 matrix? '))
+                BFI = int(input('What is the middle middle for second 3x3 matrix? '))
+                BSI = int(input('What is the middle right corner of for second 3x3 matrix? '))
+                BSE = int(input('What is the bottom left corner of for second 3x3 matrix? '))
+                BE = int(input('What is the bottom middle of for second 3x3 matrix? '))
+                BN = int(input('What is the bottom right corner of for second 3x3 matrix? '))
+                a = [AO, ATW, ATH,AFO, AFI, ASI,ASE, AE, AN]
+                b = [BO, BTW, BTH, BFO, BFI, BSI, BSE , BE, BN]
+
+                CO = a[0]*b[0]+a[1]*b[3]+a[2]*b[6 ]
+                CTW = a[0]*b[1]+a[1]*b[4]+a[2]*b[7]
+                CTH = a[0]*b[2]+a[1]*b[5]+a[2]*b[8]
+                CFO = a[3]*b[0]+a[4]*b[3]+a[5]*b[6]
+                CFI = a[3]*b[1]+a[4]*b[4]+a[5]*b[7]
+                CSI = a[3]*b[2]+a[4]*b[5]+a[5]*b[8]
+                CSE = a[6]*b[0]+a[7]*b[3]+a[8]*b[6]
+                CE = a[6]*b[1]+a[7]*b[4]+a[8]*b[7]
+                CN = a[6]*b[2]+a[7]*b[5]+a[8]*b[8]
+
+
+
+
+                C = [
+                    [CO, CTW, CTH],
+                    [CFO, CFI, CSI],
+                    [CSE, CE, CN]
+                    ]
+                for row in C:
+                    print(row)
+
+
+
             
                     
     elif 'evaluate' in numprob:

@@ -17,5 +17,6 @@ class Matrex:
             row_data += str(x)
         self.rows = row_data
 
-test = Matrex([1,2,3,4,5,6,7,8,9], 3,3)
-print(f'The matrix with the id of {test.id} has data that is \n{test.rows}')
+matrex1 = Matrex([1,2,3,4,5,6,7,8,9], 3,3)
+matrex2 = Matrex([9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5],4,4)
+print(f'The matrix with the id of {matrex2.id} has data that is \n{matrex2.rows}')

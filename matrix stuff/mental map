@@ -1,9 +1,9 @@
 Matrix Class
 ├── Attributes
-│   ├── rows
-│   ├── cols
-│   ├── data
-│   └── optional: name/id
+│   ├── rows DONE
+│   ├── cols DONE
+│   ├── data DONE
+│   └── optional: name/id DONE
 ├── Core Methods
 │   ├── add(other)
 │   ├── subtract(other)

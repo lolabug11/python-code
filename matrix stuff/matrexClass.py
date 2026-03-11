@@ -45,6 +45,8 @@ class Matrex:
                 return Matrex(new_matrex,self.col,self.row)
             else:
                 print('The matrexs are not the same size')
+
+
     def scalar_multiply(self, scalar):
         new_data = []
         for x in range(len(self.data)):
@@ -67,3 +69,9 @@ class Matrex:
                 return True
         else:
             return TypeError
+
+
+    def transpose(self):
+        for x in range(self.row):
+            #TODO
+            pass

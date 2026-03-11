@@ -72,6 +72,14 @@ class Matrex:
 
 
     def transpose(self):
-        for x in range(self.row):
-            #TODO
-            pass
+        new_col = self.row
+        new_row = self.col
+        new_data = []
+        for c in range(self.col):
+            for r in range(self.row):
+                spot = c + (r*self.col)
+                new_data.append(self.data[spot])
+
+        return Matrex(col=self.col, row=self.row)
+            
+            

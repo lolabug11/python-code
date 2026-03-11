@@ -1,0 +1,74 @@
+{
+  "addition_tests": [
+    {
+      "name": "standard_3x3",
+      "input_a": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "input_b": [9, 8, 7, 6, 5, 4, 3, 2, 1],
+      "expected": [10, 10, 10, 10, 10, 10, 10, 10, 10],
+      "cols": 3, "rows": 3
+    },
+    {
+      "name": "wide_2x3_rectangular",
+      "input_a": [1, 1, 1, 2, 2, 2],
+      "input_b": [1, 1, 1, 1, 1, 1],
+      "expected": [2, 2, 2, 3, 3, 3],
+      "cols": 3, "rows": 2
+    },
+    {
+      "name": "tall_3x2_rectangular",
+      "input_a": [10, 5, 10, 5, 10, 5],
+      "input_b": [1, 2, 1, 2, 1, 2],
+      "expected": [11, 7, 11, 7, 11, 7],
+      "cols": 2, "rows": 3
+    }
+  ],
+  "subtraction_tests": [
+    {
+      "name": "basic_subtraction",
+      "input_a": [10, 20, 30, 40],
+      "input_b": [1, 2, 3, 4],
+      "expected": [9, 18, 27, 36],
+      "cols": 2, "rows": 2
+    },
+    {
+      "name": "subtract_from_zero_1x4",
+      "input_a": [0, 0, 0, 0],
+      "input_b": [1, 2, 3, 4],
+      "expected": [-1, -2, -3, -4],
+      "cols": 4, "rows": 1
+    },
+    {
+      "name": "rectangular_3x1_col_vector",
+      "input_a": [10, 20, 30],
+      "input_b": [5, 5, 5],
+      "expected": [5, 15, 25],
+      "cols": 1, "rows": 3
+    }
+  ],
+  "scalar_tests": [
+    {
+      "name": "double_2x2",
+      "input_a": [1, 2, 3, 4],
+      "scalar": 2,
+      "expected": [2, 4, 6, 8],
+      "cols": 2, "rows": 2
+    },
+    {
+      "name": "scalar_rectangular_2x4",
+      "input_a": [1, 2, 3, 4, 5, 6, 7, 8],
+      "scalar": 10,
+      "expected": [10, 20, 30, 40, 50, 60, 70, 80],
+      "cols": 4, "rows": 2
+    }
+  ],
+  "error_handling_tests": [
+    {
+      "name": "mismatched_dimensions_add",
+      "input_a": [1, 2, 3, 4],
+      "input_b": [1, 2, 3, 4, 5, 6],
+      "rows_a": 2, "cols_a": 2,
+      "rows_b": 2, "cols_b": 3,
+      "expected_error": "TypeError"
+    }
+  ]
+}

@@ -1,22 +1,49 @@
-import random as r
-class Matrex:
-    def __init__(self, data:list, width, length):
-        self.data = data
-        self.width = width
-        self.length = length
-        self.id = r.randint(1,1000)
-        rows = []
-        for x in range(self.length):
-            start = x * self.width
-            end = start + self.width
-            rows.append(self.data[start:end])
-            rows.append('\n')
-            self.rows = rows
-        row_data = ''
-        for x in self.rows:
-            row_data += str(x)
-        self.rows = row_data
+from json import *
+from matrexClass import *
 
-matrex1 = Matrex([1,2,3,4,5,6,7,8,9], 3,3)
-matrex2 = Matrex([9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5],4,4)
-print(f'The matrix with the id of {matrex1.id} has data that is \n{matrex1.rows}')
+with open('testCase.json', 'r') as f:
+    test_cases = load(f)
+
+
+
+
+print('Addition\n')
+for item in test_cases['addition_tests']:
+    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
+    matrex2 = Matrex(item['input_b'], item['cols'], item['rows'])
+    expected = Matrex(item['expected'], item['cols'], item['rows'])
+    if expected.is_equal(matrex1.add(matrex2)):
+        print("succsess")
+        continue
+    else:
+        print(f'FAIL: failed on {item['name']}')
+        break
+print(' ')
+
+
+
+
+print('Subtraction\n')
+for item in test_cases['subtraction_tests']:
+    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
+    matrex2 = Matrex(item['input_b'], item['cols'], item['rows'])
+    expected = Matrex(item['expected'], item['cols'], item['rows'])
+    if expected.is_equal(matrex1.subtract(matrex2)):
+        print("succsess")
+        continue
+    else:
+        print(f'FAIL: failed on {item['name']}')
+        break
+print(' ')
+
+
+print('Scalar\n')
+for item in test_cases['scalar_tests']:
+    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
+    expected = Matrex(item['expected'], item['cols'], item['rows'])
+    if expected.is_equal(matrex1.scalar_multiply(item['scalar'])):
+        print('succsess')
+        continue
+    else:
+        print(f'FAIL: failed on {item['name']}')
+        break

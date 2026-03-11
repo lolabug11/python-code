@@ -1,0 +1,38 @@
+Matrix Class
+├── Attributes
+│   ├── rows (int) DONE
+│   ├── cols (int) DONE
+│   ├── data (list of lists) DONE
+│   └── name (string) DONE
+├── Core Methods
+│   ├── add(other) DONE
+│   ├── subtract(other) DONE
+│   ├── scalar_multiply(number) DONE
+│   ├── multiply(other)
+│   │   └── Logic: Triple-loop Dot Product (Row A * Col B)
+│   ├── transpose()
+│   │   └── Logic: Swap indices [i][j] to [j][i]
+│   └── shape()
+│       └── Logic: Return tuple (rows, cols)
+├── Advanced Methods
+│   ├── determinant()
+│   │   └── Constraint: Must be square
+│   ├── inverse()
+│   │   └── Dependency: Determinant & Gaussian Elimination
+│   ├── gaussian_elimination()
+│   ├── identity(size)
+│   │   └── Logic: 1s on main diagonal, 0s elsewhere
+│   └── zero_matrix(rows, cols)
+├── Internal Helpers
+│   ├── is_square()
+│   ├── check_dimensions(other)
+│   ├── is_equal(other)
+│   │   └── Logic: Compare dimensions + element values (with tolerance)
+│   └── copy()
+└── Storage & Testing
+    ├── JSON Persistence
+    │   ├── to_json(filename)
+    │   └── from_json(filename)
+    └── Test Library
+        ├── test_suite.json (Input A, Input B, Expected Result)
+        └── run_all_tests()

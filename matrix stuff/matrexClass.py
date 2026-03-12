@@ -68,7 +68,7 @@ class Matrex:
                         return False
                 return True
         else:
-            return TypeError
+            return False
 
 
     def transpose(self):
@@ -80,6 +80,6 @@ class Matrex:
                 spot = c + (r*self.col)
                 new_data.append(self.data[spot])
 
-        return Matrex(col=self.col, row=self.row)
+        return Matrex(new_data, new_col, new_row)
             
             

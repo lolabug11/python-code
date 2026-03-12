@@ -61,6 +61,29 @@
       "cols": 4, "rows": 2
     }
   ],
+  "transpose_tests": [
+    {
+      "name": "square_3x3_transpose",
+      "input_a": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "expected": [1, 4, 7, 2, 5, 8, 3, 6, 9],
+      "cols": 3, "rows": 3,
+      "expected_cols": 3, "expected_rows": 3
+    },
+    {
+      "name": "wide_to_tall_2x3",
+      "input_a": [1, 2, 3, 4, 5, 6],
+      "expected": [1, 4, 2, 5, 3, 6],
+      "cols": 3, "rows": 2,
+      "expected_cols": 2, "expected_rows": 3
+    },
+    {
+      "name": "row_to_col_vector_1x4",
+      "input_a": [10, 20, 30, 40],
+      "expected": [10, 20, 30, 40],
+      "cols": 4, "rows": 1,
+      "expected_cols": 1, "expected_rows": 4
+    }
+  ],
   "error_handling_tests": [
     {
       "name": "mismatched_dimensions_add",

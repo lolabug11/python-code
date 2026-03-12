@@ -47,3 +47,18 @@ for item in test_cases['scalar_tests']:
     else:
         print(f'FAIL: failed on {item['name']}')
         break
+print('')
+
+print('Transpose\n')
+for item in test_cases['transpose_tests']:
+    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
+    expected = Matrex(item['expected'], item['expected_cols'], item['expected_rows'])
+    expected_rows = item['expected_rows']
+    expected_cols = item['expected_cols']
+    result = matrex1.transpose()
+    if expected.is_equal(result) and expected_rows == result.row and expected_cols == result.col:
+        print('succsess')
+        continue
+    else:
+        print(f'FAIL: failed on {item['name']}\nexpected rows = {expected_rows}, result = {result.row}\n expected cols = {expected_cols}, result = {result.col}\nexpected matrex = \n{expected.data}, \nresult matrex = \n{result.data}')
+        break

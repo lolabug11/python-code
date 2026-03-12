@@ -398,6 +398,6 @@ while 'y' in repeat:
     if 'y' in repeat:
         timesrepeated+=1
 statyn = input('Do you want to see your stats: ')
-if 'y' in statyn:
+if 'y' in statyn.lower():
     print(f'You have repeated the calculator {timesrepeated} times.')
 print('Goodbye!')

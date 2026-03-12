@@ -10,4 +10,4 @@ Matrix Class
 │   ├── gaussian_elimination()
 │   ├── identity(size)
 │   │   └── Logic: 1s on main diagonal, 0s elsewhere
-│   └── zero_matrix(rows, cols)
+

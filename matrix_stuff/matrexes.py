@@ -1,7 +1,7 @@
 from json import *
 from matrexClass import *
 
-with open('testCase.json', 'r') as f:
+with open('matrix_stuff/testCase.json', 'r') as f:
     test_cases = load(f)
 
 
@@ -106,3 +106,17 @@ for item in test_cases['zero_matrix_tests']:
         print('success')
     else:
         print(f'FAIL:\nfailed on {item['name']}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+

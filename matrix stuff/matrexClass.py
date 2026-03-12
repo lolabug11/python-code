@@ -103,15 +103,21 @@ class Matrex:
 # [d,e,f]*[u,v,w] = [(dr+eu+fx), (ds+ev+fy), (dt+ew+fz)]
 # [g,h,i] [x,y,z]   [(gr+hu+ix), (gs+hv+iy), (gt+hw+iz)]
     def multiply(self, other):
-        if self.col == other.row:
-            row_count = self.row
-            col_count = other.col
-            for i in row_count:
-                for j in col_count:
-                    pass
+        if isinstance(other,Matrex):
+            if self.col == other.row:
+                row_count = self.row
+                col_count = other.col
+                new_data = []
+                for r in row_count:
+                    for c in col_count:
+                        new_data.append()
 
+
+            else:
+                raise TypeError
         else:
             raise TypeError
+            
     @staticmethod
     def zero_matrex(row,col):
         data = []

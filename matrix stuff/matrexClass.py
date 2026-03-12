@@ -106,6 +106,16 @@ class Matrex:
         if self.col == other.row:
             row_count = self.row
             col_count = other.col
+            for i in row_count:
+                for j in col_count:
+                    pass
 
         else:
             raise TypeError
+    @staticmethod
+    def zero_matrex(row,col):
+        data = []
+        for r  in range(row):
+            for c  in range(col):
+                data.append(0)
+        return Matrex(data, row, col)

@@ -11,12 +11,3 @@ Matrix Class
 │   ├── identity(size)
 │   │   └── Logic: 1s on main diagonal, 0s elsewhere
 │   └── zero_matrix(rows, cols)
-├── Internal Helpers
-│   ├── check_dimensions(other)
-└── Storage & Testing
-    ├── JSON Persistence
-    │   ├── to_json(filename)
-    │   └── from_json(filename)
-    └── Test Library
-        ├── test_suite.json (Input A, Input B, Expected Result)
-        └── run_all_tests()

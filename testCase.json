@@ -155,5 +155,25 @@
       "cols": 1, "rows": 1,
       "expected": [1, 1]
     }
+  ],
+  "zero_matrix_tests": [
+    {
+      "name": "2x2_zero_check",
+      "rows": 2,
+      "cols": 2,
+      "expected_data": [0, 0, 0, 0]
+    },
+    {
+      "name": "3x1_zero_check",
+      "rows": 3,
+      "cols": 1,
+      "expected_data": [0, 0, 0]
+    },
+    {
+      "name": "1x4_zero_check",
+      "rows": 1,
+      "cols": 4,
+      "expected_data": [0, 0, 0, 0]
+    }
   ]
 }

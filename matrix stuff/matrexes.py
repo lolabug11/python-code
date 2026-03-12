@@ -9,9 +9,9 @@ with open('testCase.json', 'r') as f:
 
 print('Addition\n')
 for item in test_cases['addition_tests']:
-    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
-    matrex2 = Matrex(item['input_b'], item['cols'], item['rows'])
-    expected = Matrex(item['expected'], item['cols'], item['rows'])
+    matrex1 = Matrex(item['input_a'], col=item['cols'], row=item['rows'])
+    matrex2 = Matrex(item['input_b'], col=item['cols'], row=item['rows'])
+    expected = Matrex(item['expected'], col=item['cols'], row=item['rows'])
     if expected.is_equal(matrex1.add(matrex2)):
         print("succsess")
         continue
@@ -25,9 +25,9 @@ print(' ')
 
 print('Subtraction\n')
 for item in test_cases['subtraction_tests']:
-    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
-    matrex2 = Matrex(item['input_b'], item['cols'], item['rows'])
-    expected = Matrex(item['expected'], item['cols'], item['rows'])
+    matrex1 = Matrex(item['input_a'], col=item['cols'], row=item['rows'])
+    matrex2 = Matrex(item['input_b'], col=item['cols'], row=item['rows'])
+    expected = Matrex(item['expected'], col=item['cols'], row=item['rows'])
     if expected.is_equal(matrex1.subtract(matrex2)):
         print("succsess")
         continue
@@ -39,8 +39,8 @@ print(' ')
 
 print('Scalar\n')
 for item in test_cases['scalar_tests']:
-    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
-    expected = Matrex(item['expected'], item['cols'], item['rows'])
+    matrex1 = Matrex(item['input_a'], col=item['cols'], row=item['rows'])
+    expected = Matrex(item['expected'], col=item['cols'], row=item['rows'])
     if expected.is_equal(matrex1.scalar_multiply(item['scalar'])):
         print('succsess')
         continue
@@ -51,8 +51,8 @@ print('')
 
 print('Transpose\n')
 for item in test_cases['transpose_tests']:
-    matrex1 = Matrex(item['input_a'], item['cols'], item['rows'])
-    expected = Matrex(item['expected'], item['expected_cols'], item['expected_rows'])
+    matrex1 = Matrex(item['input_a'], col=item['cols'], row=item['rows'])
+    expected = Matrex(item['expected'], col=item['expected_cols'], row=item['expected_rows'])
     expected_rows = item['expected_rows']
     expected_cols = item['expected_cols']
     result = matrex1.transpose()
@@ -61,4 +61,38 @@ for item in test_cases['transpose_tests']:
         continue
     else:
         print(f'FAIL: failed on {item['name']}\nexpected rows = {expected_rows}, result = {result.row}\n expected cols = {expected_cols}, result = {result.col}\nexpected matrex = \n{expected.data}, \nresult matrex = \n{result.data}')
+        break
+
+
+print('')
+print('Copy\n')
+for item in test_cases['copy_tests']:
+    matrex1 = Matrex(item['input_a'], col=item['cols'], row=item['rows'])
+    expected = Matrex(item['expected_data'], col=item['expected_cols'], row=item['expected_rows'])
+    if expected.is_equal(matrex1):
+        print('succsess')
+        continue
+    else:
+        print(f'FAIL\n failed on {item['name']}')
+        break
+
+
+print('')
+print("Is square\n")
+for item in test_cases['square_tests']:
+    matrex1 = Matrex(item['input_a'], row=item['rows'], col=item['cols'])
+    if matrex1.is_square() == item['expected']:
+        print('succsess')
+    else:
+        print(f'FAIL\n failed on {item['name']}')
+        break
+
+print('\nShape\n')
+for item in test_cases['shape_tests']:
+    matrex1 = Matrex(item['input_a'], item['rows'], item['cols'])
+    expected = item['expected']
+    if list(matrex1.shape()) == expected:
+        print('succsess')
+    else:
+        print(f'Fail\nfailed on {item['name']}')
         break

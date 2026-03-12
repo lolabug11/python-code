@@ -84,6 +84,22 @@
       "expected_cols": 1, "expected_rows": 4
     }
   ],
+  "copy_tests": [
+    {
+      "name": "copy_square_2x2",
+      "input_a": [1, 2, 3, 4],
+      "cols": 2, "rows": 2,
+      "expected_cols": 2,"expected_rows": 2,
+      "expected_data": [1, 2, 3, 4]
+    },
+    {
+      "name": "copy_rectangular_3x1",
+      "input_a": [10, 20, 30],
+      "cols": 1, "rows": 3,
+      "expected_cols": 1,"expected_rows": 3,
+      "expected_data": [10, 20, 30]
+    }
+  ],
   "error_handling_tests": [
     {
       "name": "mismatched_dimensions_add",
@@ -92,6 +108,52 @@
       "rows_a": 2, "cols_a": 2,
       "rows_b": 2, "cols_b": 3,
       "expected_error": "TypeError"
+    }
+  ],
+  "square_tests": [
+    {
+      "name": "True_square_3x3",
+      "input_a": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "cols": 3, "rows": 3,
+      "expected": true
+    },
+    {
+      "name": "False_wide_3x2",
+      "input_a": [1, 2, 3, 4, 5, 6],
+      "cols": 3, "rows": 2,
+      "expected": false
+    },
+    {
+      "name": "True_1x1_single",
+      "input_a": [5],
+      "cols": 1, "rows": 1,
+      "expected": true
+    }
+  ],
+  "shape_tests": [
+    {
+      "name": "shape_square_3x3",
+      "input_a": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "cols": 3, "rows": 3,
+      "expected": [3, 3]
+    },
+    {
+      "name": "shape_wide_2x4",
+      "input_a": [1, 2, 3, 4, 5, 6, 7, 8],
+      "cols": 4, "rows": 2,
+      "expected": [2, 4]
+    },
+    {
+      "name": "shape_tall_4x1",
+      "input_a": [10, 20, 30, 40],
+      "cols": 1, "rows": 4,
+      "expected": [4, 1]
+    },
+    {
+      "name": "shape_single_1x1",
+      "input_a": [100],
+      "cols": 1, "rows": 1,
+      "expected": [1, 1]
     }
   ]
 }

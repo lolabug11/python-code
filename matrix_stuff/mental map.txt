@@ -15,7 +15,7 @@ Matrix Class
 │   ├── determinant()
 │   ├── inverse()
 │   ├── gaussian_elimination()
-│   ├── identity(size)
+│   ├── identity(size) DONE
 │   └── zero_matrix(rows, cols) DONE
 └── Internal Helpers
     ├── is_square() DONE

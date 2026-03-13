@@ -141,4 +141,3 @@ class Matrex:
             current_index += (size +1)
 
         return matrex
-            

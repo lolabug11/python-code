@@ -108,7 +108,16 @@ for item in test_cases['zero_matrix_tests']:
         print(f'FAIL:\nfailed on {item['name']}')
 
 
-
+print('\n Multiplication\n')
+for item in test_cases['multiplication_tests']:
+    matrex1 = Matrex(item['input_a'], item['rows_a'], item['cols_a'])
+    matrex2 = Matrex(item['input_b'], item['rows_b'], item['cols_b'])
+    expected = Matrex(item['expected'], item['expected_rows'], item['expected_cols'])
+    matrex3 = matrex1.multiply(matrex2)
+    if matrex3.is_equal(expected):
+        print('success')
+    else:
+        print(f'Fail:\nfailed on {item['name']}')
 
 
 

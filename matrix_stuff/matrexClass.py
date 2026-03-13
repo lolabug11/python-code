@@ -19,7 +19,7 @@ class Matrex:
         row_data = ''
         for x in self.matrex:
             row_data += str(x)
-        self.matrex = row_data
+
         return row_data
         
     def add(self,other):
@@ -107,10 +107,15 @@ class Matrex:
             if self.col == other.row:
                 row_count = self.row
                 col_count = other.col
+                k_limit = self.col
                 new_data = []
-                for r in row_count:
-                    for c in col_count:
-                        new_data.append(sel)
+                for i in range(row_count):
+                    for j in range(col_count):
+                        data_point = 0
+                        for k in range(k_limit):
+                            data_point += self.data[(i * self.col) + k] * other.data[(k * other.col) + j]
+                        new_data.append(data_point)
+                return Matrex(new_data, row_count, col_count)
 
 
             else:
@@ -125,3 +130,15 @@ class Matrex:
             for c  in range(col):
                 data.append(0)
         return Matrex(data, row, col)
+    
+
+    @staticmethod
+    def identity_matrex(size):
+        matrex = Matrex.zero_matrex(size,size)
+        current_index = 0
+        for i in range(size):
+            matrex.data[current_index] = 1
+            current_index += (size +1)
+
+        return matrex
+            

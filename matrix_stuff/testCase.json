@@ -175,5 +175,43 @@
       "cols": 4,
       "expected_data": [0, 0, 0, 0]
     }
+  ],
+  "multiplication_tests": [
+    {
+      "name": "standard_2x2",
+      "input_a": [1, 2, 3, 4],
+      "rows_a": 2, "cols_a": 2,
+      "input_b": [5, 6, 7, 8],
+      "rows_b": 2, "cols_b": 2,
+      "expected": [19, 22, 43, 50],
+      "expected_rows": 2, "expected_cols": 2
+    },
+    {
+      "name": "rectangular_2x3_times_3x2",
+      "input_a": [1, 2, 3, 4, 5, 6],
+      "rows_a": 2, "cols_a": 3,
+      "input_b": [7, 8, 9, 10, 11, 12],
+      "rows_b": 3, "cols_b": 2,
+      "expected": [58, 64, 139, 154],
+      "expected_rows": 2, "expected_cols": 2
+    },
+    {
+      "name": "vector_dot_product_1x3_3x1",
+      "input_a": [1, 2, 3],
+      "rows_a": 1, "cols_a": 3,
+      "input_b": [4, 5, 6],
+      "rows_b": 3, "cols_b": 1,
+      "expected": [32],
+      "expected_rows": 1, "expected_cols": 1
+    },
+    {
+      "name": "identity_multiplication_3x3",
+      "input_a": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "rows_a": 3, "cols_a": 3,
+      "input_b": [1, 0, 0, 0, 1, 0, 0, 0, 1],
+      "rows_b": 3, "cols_b": 3,
+      "expected": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "expected_rows": 3, "expected_cols": 3
+    }
   ]
 }

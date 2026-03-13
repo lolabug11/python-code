@@ -1,13 +1,23 @@
 Matrix Class
+├── Attributes
+│   ├── rows DONE
+│   ├── cols DONE
+│   ├── data DONE
+│   └── optional: name/id DONE
 ├── Core Methods
-│   ├── multiply(other)
-│   │   └── Logic: Triple-loop Dot Product (Row A * Col B)
+│   ├── add(other) DONE
+│   ├── subtract(other) DONE
+│   ├── scalar_multiply(number) DONE
+│   ├── multiply(other) DONE
+│   ├── transpose() DONE
+│   └── shape() DONE
 ├── Advanced Methods
 │   ├── determinant()
-│   │   └── Constraint: Must be square
 │   ├── inverse()
-│   │   └── Dependency: Determinant & Gaussian Elimination
 │   ├── gaussian_elimination()
 │   ├── identity(size)
-│   │   └── Logic: 1s on main diagonal, 0s elsewhere
-
+│   └── zero_matrix(rows, cols) DONE
+└── Internal Helpers
+    ├── is_square() DONE
+    ├── check_dimensions(other) DONE
+    └── copy() DONE

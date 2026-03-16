@@ -1,0 +1,29 @@
+Graph Class
+├── Attributes
+│   ├── vertices             # list or set of vertex labels
+│   ├── edges                # list of edges (tuples like (v1,v2) or (v1,v2,weight))
+│   ├── directed (true/false)
+│   ├── weighted (true/false)
+│   └── adjacency_list       # dict: vertex -> list of neighbors
+├── Core Methods
+│   ├── add_vertex(vertex) DONE
+│   ├── remove_vertex(vertex) DONE
+│   ├── add_edge(v1, v2, weight=None) DONE
+│   ├── remove_edge(v1, v2)
+│   ├── get_neighbors(vertex)
+│   ├── vertex_count()
+│   └── edge_count()
+├── Analysis Methods
+│   ├── degree(vertex)
+│   ├── degree_sequence()
+│   ├── average_degree()
+│   ├── max_possible_edges()
+│   ├── is_complete()
+│   └── is_connected()
+├── Path / Traversal Methods
+│   ├── breadth_first_search(start)
+│   └── depth_first_search(start)
+└── Internal Helpers
+    ├── vertex_exists(vertex)
+    ├── edge_exists(v1, v2)
+    └── validate_vertex(vertex)

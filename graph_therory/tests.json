@@ -1,0 +1,56 @@
+[
+  {
+    "name": "simple_line_no_cycle",
+    "vertices": ["A", "B", "C"],
+    "edges": [["A", "B"], ["B", "C"]],
+    "expected": true
+  },
+  {
+    "name": "triangle_not_bipartite",
+    "vertices": ["A", "B", "C"],
+    "edges": [["A", "B"], ["B", "C"], ["A", "C"]],
+    "expected": false
+  },
+  {
+    "name": "square_bipartite",
+    "vertices": ["A", "B", "C", "D"],
+    "edges": [["A", "B"], ["B", "C"], ["C", "D"], ["D", "A"]],
+    "expected": true
+  },
+  {
+    "name": "tree_structure",
+    "vertices": ["A", "B", "C", "D"],
+    "edges": [["A", "B"], ["A", "C"], ["C", "D"]],
+    "expected": true
+  },
+  {
+    "name": "disconnected_with_cycle",
+    "vertices": ["A", "B", "C", "X", "Y", "Z"],
+    "edges": [["A", "B"], ["B", "C"], ["X", "Y"], ["Y", "Z"], ["Z", "X"]],
+    "expected": false
+  },
+  {
+    "name": "single_vertex",
+    "vertices": ["A"],
+    "edges": [],
+    "expected": true
+  },
+  {
+    "name": "two_vertices_one_edge",
+    "vertices": ["A", "B"],
+    "edges": [["A", "B"]],
+    "expected": true
+  },
+  {
+    "name": "odd_cycle_5",
+    "vertices": ["A", "B", "C", "D", "E"],
+    "edges": [["A", "B"], ["B", "C"], ["C", "D"], ["D", "E"], ["E", "A"]],
+    "expected": false
+  },
+  {
+    "name": "even_cycle_6",
+    "vertices": ["A", "B", "C", "D", "E", "F"],
+    "edges": [["A", "B"], ["B", "C"], ["C", "D"], ["D", "E"], ["E", "F"], ["F", "A"]],
+    "expected": true
+  }
+]

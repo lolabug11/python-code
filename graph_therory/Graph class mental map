@@ -1,29 +1,66 @@
 Graph Class
 ├── Attributes
-│   ├── vertices             # list or set of vertex labels
-│   ├── edges                # list of edges (tuples like (v1,v2) or (v1,v2,weight))
-│   ├── directed (true/false)
-│   ├── weighted (true/false)
-│   └── adjacency_list       # dict: vertex -> list of neighbors
-├── Core Methods
-│   ├── add_vertex(vertex) DONE
-│   ├── remove_vertex(vertex) DONE
-│   ├── add_edge(v1, v2, weight=None) DONE
-│   ├── remove_edge(v1, v2)
-│   ├── get_neighbors(vertex)
-│   ├── vertex_count()
-│   └── edge_count()
-├── Analysis Methods
-│   ├── degree(vertex)
-│   ├── degree_sequence()
-│   ├── average_degree()
-│   ├── max_possible_edges()
-│   ├── is_complete()
-│   └── is_connected()
-├── Path / Traversal Methods
-│   ├── breadth_first_search(start)
-│   └── depth_first_search(start)
-└── Internal Helpers
-    ├── vertex_exists(vertex)
-    ├── edge_exists(v1, v2)
-    └── validate_vertex(vertex)
+│   ├── vertices                  DONE
+│   ├── edges                     DONE
+│   ├── adjacency_list            DONE
+│   ├── directed                  DONE
+│   └── weighted                  DONE
+│
+├── Core Graph Operations
+│   ├── add_vertex(vertex)        DONE
+│   ├── remove_vertex(vertex)     DONE
+│   ├── add_edge(v1, v2, weight=None)   DONE
+│   ├── remove_edge(v1, v2)       DONE
+│   ├── get_neighbors(vertex)     DONE
+│   ├── vertex_count()            DONE
+│   └── edge_count()              DONE
+│
+├── Graph Property Methods
+│   ├── degree(vertex)            DONE
+│   ├── degree_sequence()         DONE
+│   ├── average_degree()          DONE
+│   ├── max_possible_edges()      DONE
+│   ├── density()                 DONE
+│   ├── is_complete()             DONE
+│   ├── is_connected()            DONE
+│   ├── is_tree()                 DONE
+│   ├── has_cycle()               DONE
+│   └── is_bipartite()
+│
+├── Traversal Algorithms
+│   ├── breadth_first_search(start)      DONE
+│   ├── depth_first_search(start)        DONE
+│   ├── recursive_DFS()
+│   └── iterative_DFS()
+│
+├── Path Algorithms
+│   ├── path_exists(v1, v2)
+│   ├── shortest_path_unweighted(v1, v2)
+│   ├── reconstruct_path()
+│   └── all_paths(v1, v2)
+│
+├── Weighted Graph Algorithms
+│   ├── dijkstra()
+│   ├── bellman_ford()
+│   └── minimum_spanning_tree()
+│       ├── prim()
+│       └── kruskal()
+│
+├── Graph Transformations
+│   ├── transpose()
+│   ├── copy()
+│   ├── subgraph(vertices)
+│   └── complement()
+│
+├── Internal Helper Methods
+│   ├── vertex_exists(vertex)     DONE
+│   ├── edge_exists(v1, v2)       DONE
+│   ├── validate_vertex(vertex)   DONE
+│   ├── validate_edge(v1, v2)
+│   └── get_edge_weight(v1, v2)
+│
+└── Utility / Output
+    ├── __str__()                 DONE
+    ├── print_adjacency_list()
+    ├── print_edges()
+    └── visualize()

@@ -204,7 +204,7 @@ class Graph:
                 if Graph.traversal(self,color,vertex) == False:
                     return False
                 
-                return True
+        return True
 
     
 

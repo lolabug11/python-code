@@ -26,5 +26,6 @@ for test in tests:
         passed += 1
     else:
         print(test["name"], "FAIL", "| expected:", expected, "got:", result)
+    print(g.adjacency_list)
 
 print(f"\n{passed}/{len(tests)} tests passed")

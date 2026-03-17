@@ -213,6 +213,7 @@ class Graph:
     def traversal(graph,color,vertex):
         for neighbor in graph.adjacency_list[vertex]:
             if neighbor not in color:
+                print(f"checking: {vertex} -> {neighbor} | {color[vertex]}, {color[neighbor]}")
                 if color[vertex] == 0:
                     color[neighbor] = 1
                     if Graph.traversal(graph,color,neighbor) == False:

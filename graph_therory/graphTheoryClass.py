@@ -311,7 +311,7 @@ class Graph:
 
 
 
-    def DFS_shortest_path(self,start,end):
+    def BFS_shortest_path(self,start,end):
         if start in self.vertices:
             visited_set = set()
             visited_list = []
@@ -324,7 +324,16 @@ class Graph:
                 to_visit.popleft()
                 visited_list.append(current)
                 if end == current:
-                    return True, visited_list
+                    shortest_path=[]
+                    parent_vertex = parent[end]
+                    
+                    while parent_vertex != start:
+                       shortest_path.append(parent_vertex)
+                       parent_vertex = parent[parent_vertex]
+                    shortest_path.append(start)
+                    shortest_path = shortest_path[::-1]
+                    return shortest_path 
+
                 else:
                     for neighbor in self.adjacency_list[current]:
                         if neighbor not in visited_set:
@@ -336,4 +345,4 @@ class Graph:
         else:
             raise TypeError(f'{start} is not a real vertex')  
     def shortest_path_unweighted(self,v1,v2):
-        self.DFS_shortest_path(v1,v2)
+        return self.DFS_shortest_path(v1,v2)

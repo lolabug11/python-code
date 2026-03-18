@@ -147,7 +147,7 @@ class Graph:
     def BFS(self, start):
         if start in self.vertices:
             visited_set = set()
-            visited_list = []
+            visited_list = [start]
             to_visit = deque([start])
             
             while len(to_visit) > 0:

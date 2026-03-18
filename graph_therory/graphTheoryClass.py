@@ -2,6 +2,7 @@ from collections import deque
 class Graph:
     def __init__(self,weighted = False, directed = False):
         self.vertices = []
+        self.vertices_set = set()
         self.edges = []
         self.adjacency_list = {}
         self.weighted = weighted
@@ -20,7 +21,8 @@ class Graph:
 
 
     def add_vertex(self, vertex):
-        if vertex not in self.vertices:
+        if vertex not in self.vertices_set:
+            self.vertices_set.add(vertex)
             self.vertices.append(vertex)
             self.adjacency_list[vertex] = []
         
@@ -28,10 +30,12 @@ class Graph:
 
 
     def add_edge(self, v1,v2,weight=None):
-        if v1 not in self.vertices:
+        if v1 not in self.vertices_set:
+            self.vertices_set.add(v1)
             self.vertices.append(v1)
             self.adjacency_list[v1] = []
-        if v2 not in self.vertices:
+        if v2 not in self.vertices_set:
+            self.vertices_set.add(v2)
             self.vertices.append(v2)
             self.adjacency_list[v2] = []
         if self.directed:
@@ -148,12 +152,13 @@ class Graph:
             
             while len(to_visit) > 0:
                 current = to_visit[0]
-                to_visit.pop()
-                visited_set.add(current)
+                to_visit.popleft()
+                
                 visited_list.append(current)
                 for neighbor in self.adjacency_list[current]:
-                    if neighbor not in visited_set and neighbor not in to_visit:
+                    if neighbor not in visited_set:
                         to_visit.append(neighbor)
+                        visited_set.add(current)
 
             return visited_list
         else:
@@ -172,10 +177,8 @@ class Graph:
             if node not in visited_set:
                 visited_set.add(node)
                 visited_list.append(node)
-                adjacency_list = self.adjacency_list[node]
-                adjacency_list= adjacency_list[::-1]
-                for neighbor in adjacency_list:
-                    if neighbor not in visited_set and neighbor not in stack:
+                for neighbor in self.adjacency_list[node]:
+                    if neighbor not in visited_set:
                         stack.append(neighbor)
         return visited_list
 
@@ -276,5 +279,35 @@ class Graph:
     def is_tree(self):
         return self.is_connected() and self.edge_count() == self.vertex_count() -1
     
+
+
+
+    def BFS_start_end(self, start,end):
+        if start in self.vertices:
+            visited_set = set()
+            visited_list = []
+            to_visit = deque([start])
+            
+            while len(to_visit) > 0:
+                if end not in visited_set:
+                    current = to_visit[0]
+                    to_visit.popleft()
+                
+                    visited_list.append(current)
+                    for neighbor in self.adjacency_list[current]:
+                        if neighbor not in visited_set:
+                            to_visit.append(neighbor)
+                            visited_set.add(current)
+
+                return True,visited_list
+            return False
+        else:
+            raise TypeError(f'{start} is not a real vertex')  
+
+
+    def path_exists(self,v1,v2):
+        path_exists,_ = self.BFS_start_end(v1,v2)
+        return path_exists
+
 
 

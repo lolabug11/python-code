@@ -287,10 +287,10 @@ class Graph:
             visited_set = set()
             visited_list = []
             to_visit = deque([start])
+            visited_set.add(start)
             while len(to_visit) > 0:
                     current = to_visit[0]
                     to_visit.popleft()
-                    visited_set.add(current)
                     visited_list.append(current)
                     if end == current:
                         return True, visited_list
@@ -298,6 +298,7 @@ class Graph:
                         for neighbor in self.adjacency_list[current]:
                             if neighbor not in visited_set:
                                 to_visit.append(neighbor)
+                                visited_set.add(neighbor)
                         
             return False
         else:

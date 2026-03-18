@@ -1,3 +1,4 @@
+from collections import deque
 class Graph:
     def __init__(self,weighted = False, directed = False):
         self.vertices = []
@@ -143,11 +144,11 @@ class Graph:
         if start in self.vertices:
             visited_set = set()
             visited_list = []
-            to_visit = [start]
+            to_visit = deque([start])
             
             while len(to_visit) > 0:
                 current = to_visit[0]
-                to_visit.remove(to_visit[0])
+                to_visit.pop()
                 visited_set.add(current)
                 visited_list.append(current)
                 for neighbor in self.adjacency_list[current]:
@@ -186,7 +187,7 @@ class Graph:
         visited_list.append(start)
         for neighbor in graph.adjacency_list[start]:
             if neighbor not in visited_set:
-                Graph.DFS_DFS(graph,visited_set,neighbor)
+                Graph.DFS_DFS(graph,visited_set,neighbor,visited_list)
 
     def DFS(self, start):
         visited_set = set()

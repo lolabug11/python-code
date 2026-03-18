@@ -17,8 +17,10 @@ def build_stress_graph(width=100, depth=100):
             prev = node
 
     return g
+start_time= perf_counter()
 g = build_stress_graph(200,200)
-
+end_time = perf_counter()
+graph_time = end_time - start_time
 start_time = perf_counter()
 for x in range(10):
     g.DFS("A")
@@ -37,4 +39,4 @@ for x in range(10):
     print(x)
 end_time = perf_counter()
 BFS_time = end_time - start_time
-print(f'DFS time:{DFS_time}\nIterable DFS time: {iterable_DFS_time}\nBFS time: {BFS_time}')
+print(f'Graph time: {graph_time}\nDFS time:{DFS_time}\nIterable DFS time: {iterable_DFS_time}\nBFS time: {BFS_time}')

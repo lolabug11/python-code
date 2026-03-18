@@ -25,13 +25,13 @@ Graph Class
 │   ├── is_connected()            DONE
 │   ├── is_tree()                 DONE
 │   ├── has_cycle()               DONE
-│   └── is_bipartite()
+│   └── is_bipartite()            DONE
 │
 ├── Traversal Algorithms
 │   ├── breadth_first_search(start)      DONE
 │   ├── depth_first_search(start)        DONE
-│   ├── recursive_DFS()
-│   └── iterative_DFS()
+│   ├── recursive_DFS()                  DONE
+│   └── iterative_DFS()                  DONE
 │
 ├── Path Algorithms
 │   ├── path_exists(v1, v2)

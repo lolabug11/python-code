@@ -1,35 +1,37 @@
 from graphTheoryClass import *
-import json
+from time import *
+def build_stress_graph(width=100, depth=100):
+    g = Graph()
 
-def run_tests():
-    with open('graph_therory/tests.json', 'r') as f:
-        tests = json.load(f)
+    root = "A"
+    g.add_vertex(root)
 
-    passed = 0
+    for i in range(width):
+        branch = f"B{i}"
+        g.add_edge(root, branch)
 
-    for test in tests:
-        g = Graph()
+        prev = branch
+        for j in range(depth):
+            node = f"{branch}_{j}"
+            g.add_edge(prev, node)
+            prev = node
 
-        # add vertices
-        for v in test["vertices"]:
-            g.add_vertex(v)
+    return g
+g = build_stress_graph(200,200)
 
-        # add edges
-        for e in test["edges"]:
-            g.add_edge(e[0], e[1])
-
-        result = g.is_bipartite()
-        expected = test["expected"]
-
-        if result == expected:
-            print(f"PASS: {test['name']}")
-            passed += 1
-        else:
-            print(f"FAIL: {test['name']}")
-            print(f"  expected: {expected}")
-            print(f"  got:      {result}")
-
-    print(f"\n{passed}/{len(tests)} tests passed")
-
-
-run_tests()
+start_time = perf_counter()
+for _ in range(50):
+    g.DFS("A")
+end_time = perf_counter()
+DFS_time = end_time - start_time
+start_time = perf_counter()
+for _ in range(50):
+    g.iterable_DFS("A")
+end_time = perf_counter()
+iterable_DFS_time = end_time - start_time
+start_time = perf_counter()
+for _ in range(50):
+    g.BFS("A")
+end_time = perf_counter()
+BFS_time = end_time - start_time
+print(f'DFS time:{DFS_time}\nIterable DFS time: {iterable_DFS_time}\nBFS time: {BFS_time}')

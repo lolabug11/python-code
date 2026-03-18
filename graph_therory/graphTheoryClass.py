@@ -155,7 +155,25 @@ class Graph:
             return visited   
         else:
             raise TypeError(f'{start} is not a real vertex')   
-    
+        
+
+
+    def iterable_DFS(self,start):
+        visited = []
+        stack = []
+        stack.append(start)
+        while len(stack) >0:
+            node = stack[-1]
+            stack.pop()
+            if node not in visited:
+                visited.append(node)
+                adjacency_list = self.adjacency_list[node]
+                adjacency_list= adjacency_list[::-1]
+                for neighbor in adjacency_list:
+                    if neighbor not in visited and neighbor not in stack:
+                        stack.append(neighbor)
+        return visited
+
 
 
     @staticmethod
@@ -213,7 +231,7 @@ class Graph:
     def traversal(graph,color,vertex):
         for neighbor in graph.adjacency_list[vertex]:
             if neighbor not in color:
-                print(f"checking: {vertex} -> {neighbor} | {color[vertex]}, {color[neighbor]}")
+                print(f"checking: {vertex} -> {neighbor} | {color}")
                 if color[vertex] == 0:
                     color[neighbor] = 1
                     if Graph.traversal(graph,color,neighbor) == False:
@@ -223,6 +241,7 @@ class Graph:
                     if Graph.traversal(graph,color,neighbor) == False:
                         return False
             else:
+                print(f"revisit: {vertex} -> {neighbor} | vertex_color={color[vertex]}, neighbor_color={color[neighbor]} | colors={color}")
                 if color[neighbor] == color[vertex]:
                     return False
         return True

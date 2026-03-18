@@ -156,12 +156,13 @@ class Graph:
         while len(stack) >0:
             node = stack[-1]
             stack.pop()
-            visited_set.add(node)
+            
             if node not in visited_set:
-                visited_list.append(node)
                 for neighbor in self.adjacency_list[node]:
                     if neighbor not in visited_set:
                         stack.append(neighbor)
+                visited_set.add(node)
+                visited_list.append(node)
         return visited_list
 
 

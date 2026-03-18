@@ -308,8 +308,8 @@ class Graph:
 
 
 
-    def BFS_shortest_path(self,start,end):
-        if start in self.vertices:
+    def BFS_shortest_path(graph,start,end):
+        if start in graph.vertices:
             visited_set = set()
             visited_list = []
             parent = {}
@@ -321,10 +321,10 @@ class Graph:
                 to_visit.popleft()
                 visited_list.append(current)
                 if end == current:
-                    return self.reconstruct_path(self, end)
+                    return graph.reconstruct_path(graph, end)
 
                 else:
-                    for neighbor in self.adjacency_list[current]:
+                    for neighbor in graph.adjacency_list[current]:
                         if neighbor not in visited_set:
                             parent[neighbor] = current
                             to_visit.append(neighbor)
@@ -334,7 +334,8 @@ class Graph:
         else:
             raise TypeError(f'{start} is not a real vertex')  
     def shortest_path_unweighted(self,v1,v2):
-        return self.BFS_shortest_path(v1,v2)
+        shortest_path = self.BFS_shortest_path(self,v1,v2)
+        return shortest_path
 
 
     def reconstruct_path(self, parent_map,end):

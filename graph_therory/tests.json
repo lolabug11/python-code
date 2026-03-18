@@ -1,0 +1,179 @@
+{
+  "tests": [
+    {
+      "name": "add_vertex_and_counts",
+      "actions": [
+        ["add_vertex", "A"],
+        ["add_vertex", "B"]
+      ],
+      "expected": {
+        "vertex_count": 2
+      }
+    },
+    {
+      "name": "add_edge_undirected",
+      "actions": [
+        ["add_edge", "A", "B"]
+      ],
+      "expected": {
+        "edge_count": 1,
+        "neighbors_A": ["B"],
+        "neighbors_B": ["A"]
+      }
+    },
+    {
+      "name": "remove_vertex",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["remove_vertex", "A"]
+      ],
+      "expected": {
+        "vertex_count": 1,
+        "edge_count": 0
+      }
+    },
+    {
+      "name": "remove_edge",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["remove_edge", "A", "B"]
+      ],
+      "expected": {
+        "edge_count": 0
+      }
+    },
+    {
+      "name": "degree",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "A", "C"]
+      ],
+      "expected": {
+        "degree_A": 2
+      }
+    },
+    {
+      "name": "degree_sequence",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "A", "C"]
+      ],
+      "expected": {
+        "degree_sequence": [2, 1, 1]
+      }
+    },
+    {
+      "name": "is_connected_true",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "B", "C"]
+      ],
+      "expected": {
+        "is_connected": true
+      }
+    },
+    {
+      "name": "is_connected_false",
+      "actions": [
+        ["add_vertex", "A"],
+        ["add_vertex", "B"]
+      ],
+      "expected": {
+        "is_connected": false
+      }
+    },
+    {
+      "name": "BFS",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "A", "C"]
+      ],
+      "expected": {
+        "BFS_A": ["A", "B", "C"]
+      }
+    },
+    {
+      "name": "DFS_iterative",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "A", "C"]
+      ],
+      "expected": {
+        "DFS_A_length": 3
+      }
+    },
+    {
+      "name": "path_exists_true",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "B", "C"]
+      ],
+      "expected": {
+        "path_exists": true
+      }
+    },
+    {
+      "name": "shortest_path",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "B", "C"]
+      ],
+      "expected": {
+        "shortest_path": ["A", "B", "C"]
+      }
+    },
+    {
+      "name": "has_cycle_true",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "B", "C"],
+        ["add_edge", "C", "A"]
+      ],
+      "expected": {
+        "has_cycle": true
+      }
+    },
+    {
+      "name": "has_cycle_false",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "B", "C"]
+      ],
+      "expected": {
+        "has_cycle": false
+      }
+    },
+    {
+      "name": "is_tree_true",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "B", "C"]
+      ],
+      "expected": {
+        "is_tree": true
+      }
+    },
+    {
+      "name": "is_bipartite_true",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "C", "B"]
+      ],
+      "expected": {
+        "is_bipartite": true
+      }
+    },
+    {
+      "name": "all_paths",
+      "actions": [
+        ["add_edge", "A", "B"],
+        ["add_edge", "A", "C"],
+        ["add_edge", "B", "D"],
+        ["add_edge", "C", "D"]
+      ],
+      "expected": {
+        "all_paths_count": 2
+      }
+    }
+  ]
+}

@@ -321,15 +321,7 @@ class Graph:
                 to_visit.popleft()
                 visited_list.append(current)
                 if end == current:
-                    shortest_path=[end]
-                    parent_vertex = parent[end]
-                    
-                    while parent_vertex != None:
-                       shortest_path.append(parent_vertex)
-                       parent_vertex = parent[parent_vertex]
-                    
-                    shortest_path = shortest_path[::-1]
-                    return shortest_path 
+                    return self.reconstruct_path(self, end)
 
                 else:
                     for neighbor in self.adjacency_list[current]:
@@ -353,3 +345,33 @@ class Graph:
             parent_vertex = parent_map[parent_vertex]
         shortest_path = shortest_path[::-1]
         return shortest_path
+
+
+    
+    def all_paths_DFS_helper(self,visited_set, start,end,current_path,all_paths):
+        visited_set.add(start)
+        if start == end:
+            all_paths.append(current_path)
+            current_path.remove(start)
+            return 
+        else:
+            for neighbor in self.adjacency_list[start]:
+                if neighbor in current_path:
+                    pass
+                else:
+                    self.all_paths_DFS_helper(visited_set,start,end,current_path,all_paths)
+            current_path.remove(start)
+            return
+
+        
+
+    def all_paths_DFS(self, start,end):
+        visited_set = set()
+        all_paths = []
+        current_path = []
+        self.all_paths_DFS_helper(visited_set,start,end,current_path, all_paths)
+        return all_paths
+
+
+    def all_paths(self, v1, v2):
+        return self.all_paths_DFS

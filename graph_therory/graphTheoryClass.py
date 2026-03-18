@@ -324,13 +324,13 @@ class Graph:
                 to_visit.popleft()
                 visited_list.append(current)
                 if end == current:
-                    shortest_path=[]
+                    shortest_path=[end]
                     parent_vertex = parent[end]
                     
-                    while parent_vertex != start:
+                    while parent_vertex != None:
                        shortest_path.append(parent_vertex)
                        parent_vertex = parent[parent_vertex]
-                    shortest_path.append(start)
+                    
                     shortest_path = shortest_path[::-1]
                     return shortest_path 
 
@@ -345,4 +345,4 @@ class Graph:
         else:
             raise TypeError(f'{start} is not a real vertex')  
     def shortest_path_unweighted(self,v1,v2):
-        return self.DFS_shortest_path(v1,v2)
+        return self.BFS_shortest_path(v1,v2)

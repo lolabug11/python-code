@@ -287,20 +287,18 @@ class Graph:
             visited_set = set()
             visited_list = []
             to_visit = deque([start])
-            visited_list.append(start)
-            visited_set.add(start)
             while len(to_visit) > 0:
                     current = to_visit[0]
                     to_visit.popleft()
                     visited_set.add(current)
                     visited_list.append(current)
-                    if end != current:
+                    if end == current:
+                        return True, visited_list
+                    else:
                         for neighbor in self.adjacency_list[current]:
                             if neighbor not in visited_set:
                                 to_visit.append(neighbor)
-                                visited_set.add(current)
-                    else:
-                        return True, visited_list
+                        
             return False
         else:
             raise TypeError(f'{start} is not a real vertex')  

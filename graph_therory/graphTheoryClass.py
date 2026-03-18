@@ -154,7 +154,7 @@ class Graph:
             for neighbor in self.adjacency_list[node]:
                 if neighbor not in visited_set:     
                     to_visit.append(neighbor)
-                visited_set.add(neighbor)
+                    visited_set.add(neighbor)
             visited_list.append(node)
         return visited_list
 

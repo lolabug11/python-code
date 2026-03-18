@@ -349,7 +349,7 @@ class Graph:
         shortest_path= [end]
         parent_vertex = parent_map[end]
         while parent_vertex != None:
-            shortest_path.append(parent_map[parent_vertex])
             parent_vertex = parent_map[parent_vertex]
+            shortest_path.append(parent_map[parent_vertex])
         shortest_path = shortest_path[::-1]
         return shortest_path

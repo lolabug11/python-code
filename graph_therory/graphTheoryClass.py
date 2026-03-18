@@ -346,10 +346,10 @@ class Graph:
 
 
     def reconstruct_path(self, parent_map, start,end):
-        shortest_path= [end]
-        parent_vertex = parent_map[end]
+        shortest_path = []
+        parent_vertex= [end]
         while parent_vertex != None:
+            shortest_path.append(parent_vertex)
             parent_vertex = parent_map[parent_vertex]
-            shortest_path.append(parent_map[parent_vertex])
         shortest_path = shortest_path[::-1]
         return shortest_path

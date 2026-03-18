@@ -144,6 +144,20 @@ class Graph:
     
 
 
+    def BFS(self, start):
+        visited_set = set([start])
+        visited_list = [start]
+        to_visit = deque([start])
+        while len(to_visit) > 0:
+            node =  to_visit[0]
+            to_visit.popleft()
+            for neighbor in self.adjacency_list[node]:
+                if neighbor not in visited_set:     
+                    to_visit.append(neighbor)
+            visited_set.add(node)
+            visited_list.append(node)
+        return visited_list
+
  
         
 
@@ -168,17 +182,17 @@ class Graph:
 
 
     @staticmethod
-    def DFS_DFS(graph,visited_set, start,visited_list):
+    def DFS_helper(graph,visited_set, start,visited_list):
         visited_set.add(start)
         visited_list.append(start)
         for neighbor in graph.adjacency_list[start]:
             if neighbor not in visited_set:
-                Graph.DFS_DFS(graph,visited_set,neighbor,visited_list)
+                Graph.DFS_helper(graph,visited_set,neighbor,visited_list)
 
     def DFS(self, start):
         visited_set = set()
         visited_list = []
-        Graph.DFS_DFS(self,visited_set,start,visited_list)
+        Graph.DFS_helper(self,visited_set,start,visited_list)
         return visited_set, visited_list
     
 

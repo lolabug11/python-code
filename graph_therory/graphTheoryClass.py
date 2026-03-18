@@ -351,8 +351,9 @@ class Graph:
     def all_paths_DFS_helper(self, start,end,current_path,all_paths):
         current_path.append(start)
         if start == end:
-            all_paths.append(current_path)
-            current_path.remove(-1)
+            current_path_copy = current_path.copy()
+            all_paths.append(current_path_copy)
+            current_path.pop()
             return 
         else:
             for neighbor in self.adjacency_list[start]:
@@ -360,7 +361,7 @@ class Graph:
                     pass
                 else:
                     self.all_paths_DFS_helper(neighbor,end,current_path,all_paths)
-            current_path.remove(-1)
+            current_path.pop()
             return
 
         
@@ -368,6 +369,7 @@ class Graph:
     def all_paths_DFS(self, start,end):
         all_paths = []
         current_path = []
+        
         self.all_paths_DFS_helper(start,end,current_path, all_paths)
         return all_paths
 

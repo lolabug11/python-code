@@ -146,7 +146,7 @@ class Graph:
 
     def BFS(self, start):
         visited_set = set([start])
-        visited_list = [start]
+        visited_list = []
         to_visit = deque([start])
         while len(to_visit) > 0:
             node =  to_visit[0]
@@ -154,7 +154,7 @@ class Graph:
             for neighbor in self.adjacency_list[node]:
                 if neighbor not in visited_set:     
                     to_visit.append(neighbor)
-            visited_set.add(node)
+                visited_set.add(neighbor)
             visited_list.append(node)
         return visited_list
 

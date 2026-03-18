@@ -141,52 +141,58 @@ class Graph:
 
     def BFS(self, start):
         if start in self.vertices:
-            visited = []
+            visited_set = set()
+            visited_list = []
             to_visit = [start]
             
             while len(to_visit) > 0:
                 current = to_visit[0]
                 to_visit.remove(to_visit[0])
-                visited.append(current)
+                visited_set.add(current)
+                visited_list.append(current)
                 for neighbor in self.adjacency_list[current]:
-                    if neighbor not in visited and neighbor not in to_visit:
+                    if neighbor not in visited_set and neighbor not in to_visit:
                         to_visit.append(neighbor)
 
-            return visited   
+            return visited_list
         else:
             raise TypeError(f'{start} is not a real vertex')   
         
 
 
     def iterable_DFS(self,start):
-        visited = []
+        visited_set = set()
+        visited_list = []
         stack = []
         stack.append(start)
         while len(stack) >0:
             node = stack[-1]
             stack.pop()
-            if node not in visited:
-                visited.append(node)
+            if node not in visited_set:
+                visited_set.add(node)
+                visited_list.append(node)
                 adjacency_list = self.adjacency_list[node]
                 adjacency_list= adjacency_list[::-1]
                 for neighbor in adjacency_list:
-                    if neighbor not in visited and neighbor not in stack:
+                    if neighbor not in visited_set and neighbor not in stack:
                         stack.append(neighbor)
-        return visited
+        return visited_list
 
 
 
     @staticmethod
-    def DFS_DFS(graph,visited, start):
-        visited.append(start)
+    def DFS_DFS(graph,visited_set, start,visited_list):
+        visited_set.add(start)
+        visited_list.append(start)
         for neighbor in graph.adjacency_list[start]:
-            if neighbor not in visited:
-                Graph.DFS_DFS(graph,visited,neighbor)
+            if neighbor not in visited_set:
+                Graph.DFS_DFS(graph,visited_set,neighbor)
 
     def DFS(self, start):
-        visited = []
-        Graph.DFS_DFS(self,visited,start)
-        return visited
+        visited_set = set()
+        visited_list = []
+        Graph.DFS_DFS(self,visited_set,start,visited_list)
+        return visited_set, visited_list
     
 
 

@@ -343,3 +343,13 @@ class Graph:
             raise TypeError(f'{start} is not a real vertex')  
     def shortest_path_unweighted(self,v1,v2):
         return self.BFS_shortest_path(v1,v2)
+
+
+    def reconstruct_path(self, parent_map, start,end):
+        shortest_path= [end]
+        parent_vertex = parent_map[end]
+        while parent_vertex != None:
+            shortest_path.append(parent_map[parent_vertex])
+            parent_vertex = parent_map[parent_vertex]
+        shortest_path = shortest_path[::-1]
+        return shortest_path

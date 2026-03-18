@@ -345,9 +345,9 @@ class Graph:
         return self.BFS_shortest_path(v1,v2)
 
 
-    def reconstruct_path(self, parent_map, start,end):
+    def reconstruct_path(self, parent_map,end):
         shortest_path = []
-        parent_vertex= [end]
+        parent_vertex= end
         while parent_vertex != None:
             shortest_path.append(parent_vertex)
             parent_vertex = parent_map[parent_vertex]

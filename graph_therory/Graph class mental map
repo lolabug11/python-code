@@ -34,7 +34,7 @@ Graph Class
 │   └── iterative_DFS()                  DONE
 │
 ├── Path Algorithms
-│   ├── path_exists(v1, v2)
+│   ├── path_exists(v1, v2)              DONE
 │   ├── shortest_path_unweighted(v1, v2)
 │   ├── reconstruct_path()
 │   └── all_paths(v1, v2)

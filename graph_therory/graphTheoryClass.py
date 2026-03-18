@@ -158,7 +158,7 @@ class Graph:
                 for neighbor in self.adjacency_list[current]:
                     if neighbor not in visited_set:
                         to_visit.append(neighbor)
-                        visited_set.add(current)
+                        visited_set.add(neighbor)
 
             return visited_list
         else:
@@ -311,3 +311,29 @@ class Graph:
 
 
 
+    def DFS_shortest_path(self,start,end):
+        if start in self.vertices:
+            visited_set = set()
+            visited_list = []
+            parent = {}
+            to_visit = deque([start])
+            visited_set.add(start)
+            parent[start] = None
+            while len(to_visit) > 0:
+                current = to_visit[0]
+                to_visit.popleft()
+                visited_list.append(current)
+                if end == current:
+                    return True, visited_list
+                else:
+                    for neighbor in self.adjacency_list[current]:
+                        if neighbor not in visited_set:
+                            parent[neighbor] = current
+                            to_visit.append(neighbor)
+                            visited_set.add(neighbor)
+                        
+            return False
+        else:
+            raise TypeError(f'{start} is not a real vertex')  
+    def shortest_path_unweighted(self,v1,v2):
+        self.DFS_shortest_path(v1,v2)

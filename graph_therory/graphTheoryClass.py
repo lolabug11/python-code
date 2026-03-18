@@ -144,25 +144,7 @@ class Graph:
     
 
 
-    def BFS(self, start):
-        if start in self.vertices:
-            visited_set = set()
-            visited_list = [start]
-            to_visit = deque([start])
-            
-            while len(to_visit) > 0:
-                current = to_visit[0]
-                to_visit.popleft()
-                
-                visited_list.append(current)
-                for neighbor in self.adjacency_list[current]:
-                    if neighbor not in visited_set:
-                        to_visit.append(neighbor)
-                        visited_set.add(neighbor)
-
-            return visited_list
-        else:
-            raise TypeError(f'{start} is not a real vertex')   
+ 
         
 
 
@@ -175,11 +157,12 @@ class Graph:
             node = stack[-1]
             stack.pop()
             if node not in visited_set:
-                visited_set.add(node)
+                
                 visited_list.append(node)
                 for neighbor in self.adjacency_list[node]:
                     if neighbor not in visited_set:
                         stack.append(neighbor)
+                        visited_set.add(node)
         return visited_list
 
 

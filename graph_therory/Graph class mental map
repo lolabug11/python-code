@@ -37,7 +37,7 @@ Graph Class
 │   ├── path_exists(v1, v2)              DONE
 │   ├── shortest_path_unweighted(v1, v2) DONE
 │   ├── reconstruct_path()               DONE
-│   └── all_paths(v1, v2)
+│   └── all_paths(v1, v2)                DONE
 │
 ├── Weighted Graph Algorithms
 │   ├── dijkstra()

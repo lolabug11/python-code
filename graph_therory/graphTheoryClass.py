@@ -238,7 +238,6 @@ class Graph:
     def traversal(graph,color,vertex):
         for neighbor in graph.adjacency_list[vertex]:
             if neighbor not in color:
-                print(f"checking: {vertex} -> {neighbor} | {color}")
                 if color[vertex] == 0:
                     color[neighbor] = 1
                     if Graph.traversal(graph,color,neighbor) == False:
@@ -248,7 +247,6 @@ class Graph:
                     if Graph.traversal(graph,color,neighbor) == False:
                         return False
             else:
-                print(f"revisit: {vertex} -> {neighbor} | vertex_color={color[vertex]}, neighbor_color={color[neighbor]} | colors={color}")
                 if color[neighbor] == color[vertex]:
                     return False
         return True
@@ -321,7 +319,7 @@ class Graph:
                 to_visit.popleft()
                 visited_list.append(current)
                 if end == current:
-                    path = self.reconstruct_path(self,end)
+                    path = self.reconstruct_path(parent,end)
                     return path
 
                 else:
@@ -377,4 +375,5 @@ class Graph:
 
 
     def all_paths(self, v1, v2):
-        return self.all_paths_DFS
+        path = self.all_paths_DFS(v1,v2)
+        return path

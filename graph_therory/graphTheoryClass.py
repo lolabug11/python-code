@@ -380,7 +380,19 @@ class Graph:
     
 
 
-
+    def find_edge_weight(self,v1,v2):
+        if self.weighted:
+            if self.vertex_exists(v1) and self.vertex_exists(v2):
+                weight = None
+                for tuple in self.edges:
+                    if v1 in tuple and v2 in tuple:
+                        weight = tuple[2]
+                        return weight
+                
+            else:
+                raise TypeError(f'Either {v1} or {v2} is not a real vertex')
+        else:
+            raise TypeError(f'{self} needs to be weighted')
 
     def dijkstra(self,start):
         if self.weighted:
@@ -391,20 +403,23 @@ class Graph:
                 distance[node] = float('inf')
                 unvisited_nodes.add(node)
             distance[start] = 0
-            while unvisited_nodes > 0:
+            while len(unvisited_nodes) > 0:
                 smallest_node = [None, float('inf')]
                 for node in unvisited_nodes:
-                    if distance[node] > smallest_node[1]:
+                    if distance[node] < smallest_node[1]:
                         smallest_node=[node,distance[node]]
                 
-                if distance[node] == float('inf'):
+                if distance[smallest_node[0]] == float('inf'):
                     break
                 else:
-                    for neighbor in self.adjacency_list[smallest_node]:
-                        if distance[smallest_node] < distance[neighbor]:
-                            smallest_node = [neighbor,distance[neighbor]]
-                    visited_nodes.add(smallest_node)
-                    unvisited_nodes.remove(smallest_node)
+                    for neighbor in self.adjacency_list[smallest_node[0]]:
+                        if distance[smallest_node[0]] < distance[neighbor]:
+                            weight = self.find_edge_weight(neighbor,smallest_node[0])
+                            new_distance = weight + distance[smallest_node[0]]
+                            if new_distance < distance[neighbor]:
+                                distance[neighbor] = new_distance
+                    visited_nodes.add(smallest_node[0])
+                    unvisited_nodes.remove(smallest_node[0])
 
 
         else:

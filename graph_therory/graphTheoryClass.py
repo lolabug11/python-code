@@ -413,11 +413,10 @@ class Graph:
                     break
                 else:
                     for neighbor in self.adjacency_list[smallest_node[0]]:
-                        if distance[smallest_node[0]] < distance[neighbor]:
-                            weight = self.find_edge_weight(neighbor,smallest_node[0])
-                            new_distance = weight + distance[smallest_node[0]]
-                            if new_distance < distance[neighbor]:
-                                distance[neighbor] = new_distance
+                        weight = self.find_edge_weight(neighbor,smallest_node[0])
+                        new_distance = weight + distance[smallest_node[0]]
+                        if new_distance < distance[neighbor]:
+                            distance[neighbor] = new_distance
                     visited_nodes.add(smallest_node[0])
                     unvisited_nodes.remove(smallest_node[0])
 

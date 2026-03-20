@@ -420,7 +420,7 @@ class Graph:
                         new_distance = weight + distance[smallest_node[0]]
                         if new_distance < distance[neighbor]:
                             distance[neighbor] = new_distance
-                    unvisited_nodes.remove(smallest_node[0])
+                    unvisited_nodes.remove(smallest_node[0])      
             return distance
 
 

@@ -391,19 +391,20 @@ class Graph:
                 distance[node] = float('inf')
                 unvisited_nodes.add(node)
             distance[start] = 0
-            lowest_distance_node = [None, float('inf')]
-            for node in distance:
-                if distance[node] < lowest_distance_node[1]:
-                    lowest_distance_node = [node,distance[node]]
-            visited_nodes.add(lowest_distance_node[0])
-            unvisited_nodes.remove(lowest_distance_node[0])
-            for neighbor in self.adjacency_list[lowest_distance_node[0]]:
-                if self.edge_exists(neighbor,lowest_distance_node[0]):
-                    for index in self.edges:
-                        
-                        if node in self.edges and neighbor in self.edges:
-                            edge_touple = self.edges[index]
-                            distance[neighbor] = edge_touple[2]
+            while unvisited_nodes > 0:
+                smallest_node = [None, float('inf')]
+                for node in unvisited_nodes:
+                    if distance[node] > smallest_node[1]:
+                        smallest_node=[node,distance[node]]
+                
+                if distance[node] == float('inf'):
+                    break
+                else:
+                    for neighbor in self.adjacency_list[smallest_node]:
+                        if distance[smallest_node] < distance[neighbor]:
+                            smallest_node = [neighbor,distance[neighbor]]
+                    visited_nodes.add(smallest_node)
+                    unvisited_nodes.remove(smallest_node)
 
 
         else:

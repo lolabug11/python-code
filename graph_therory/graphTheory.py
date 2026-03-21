@@ -34,8 +34,8 @@ class Graph:
 
 
 
-g = Graph()
+g = Graph(weighted=True)
 g.add_vertex('A')
 g.add_vertex('B')
-g.add_edge('A', 'B')
+g.add_edge('A', 'B', 500)
 print(g)

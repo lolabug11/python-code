@@ -414,15 +414,15 @@ class Graph:
                     break
                 else:
                     for neighbor in self.adjacency_list[smallest_node[0]]:
-                        if neighbor in unvisited_nodes:
-                            parent[neighbor] = smallest_node[0]
                         weight = self.find_edge_weight(neighbor,smallest_node[0])
                         new_distance = weight + distance[smallest_node[0]]
                         if new_distance < distance[neighbor]:
                             distance[neighbor] = new_distance
+                            parent[neighbor] = smallest_node[0]
                     unvisited_nodes.remove(smallest_node[0])      
             return distance
-
-
         else:
             raise TypeError(f'{self} needs to be a weighted graph.')
+
+
+

@@ -1,3 +1,5 @@
 {
-    "python.REPL.enableREPLSmartSend": false
+    "python.REPL.enableREPLSmartSend": false,
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true    
 }

@@ -1,0 +1,62 @@
+Graph Class
+├── Attributes                  
+│   ├── adjacency_list                      DONE     
+│   ├── directed                            DONE
+│   └── weighted                            DONE
+├── Core Graph Operations                   DONE
+│   ├── add_vertex(vertex)                  DONE
+│   ├── remove_vertex(vertex)               DONE
+│   ├── add_edge(v1, v2, weight=None)       DONE
+│   ├── remove_edge(v1, v2)                 DONE
+│   ├── get_neighbors(vertex)               DONE
+│   ├── vertex_count()                      DONE
+│   └── edge_count()                        DONE
+├── Graph Property Methods
+│   ├── degree(vertex)            
+│   ├── degree_sequence()         
+│   ├── average_degree()          
+│   ├── max_possible_edges()      
+│   ├── density()                 
+│   ├── is_complete()             
+│   ├── is_connected()            
+│   ├── is_tree()                 
+│   ├── has_cycle()               
+│   └── is_bipartite()            
+│
+├── Traversal Algorithms
+│   ├── breadth_first_search(start)      
+│   ├── depth_first_search(start)        
+│   ├── recursive_DFS()                  
+│   └── iterative_DFS()                  
+│
+├── Path Algorithms
+│   ├── path_exists(v1, v2)              
+│   ├── shortest_path_unweighted(v1, v2) 
+│   ├── reconstruct_path()               
+│   └── all_paths(v1, v2)                
+│
+├── Weighted Graph Algorithms
+│   ├── dijkstra()                       
+│   ├── bellman_ford()
+│   └── minimum_spanning_tree()
+│       ├── prim()
+│       └── kruskal()
+│
+├── Graph Transformations
+│   ├── transpose()
+│   ├── copy()
+│   ├── subgraph(vertices)
+│   └── complement()
+│
+├── Internal Helper Methods
+│   ├── vertex_exists(vertex)               DONE
+│   ├── edge_exists(v1, v2)       
+│   ├── validate_vertex(vertex)   
+│   ├── validate_edge(v1, v2)
+│   └── get_edge_weight(v1, v2)
+│
+└── Utility / Output
+    ├── __str__()                 
+    ├── print_adjacency_list()
+    ├── print_edges()
+    └── visualize()

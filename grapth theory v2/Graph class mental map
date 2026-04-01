@@ -12,9 +12,9 @@ Graph Class
 │   ├── vertex_count()                      DONE
 │   └── edge_count()                        DONE
 ├── Graph Property Methods
-│   ├── degree(vertex)            
-│   ├── degree_sequence()         
-│   ├── average_degree()          
+│   ├── degree(vertex)                      DONE
+│   ├── degree_sequence()                   DONE
+│   ├── average_degree()                    DONE
 │   ├── max_possible_edges()      
 │   ├── density()                 
 │   ├── is_complete()             

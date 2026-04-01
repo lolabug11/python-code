@@ -18,7 +18,7 @@ def build_stress_graph(width=100, depth=100):
 
     return g
 start_time= perf_counter()
-g = build_stress_graph(900,900)
+g = build_stress_graph(900,900 )
 end_time = perf_counter()
 graph_time = end_time - start_time
 start_time = perf_counter()

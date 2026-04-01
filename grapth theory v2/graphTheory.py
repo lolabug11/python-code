@@ -121,9 +121,44 @@ class Graph:
     def degree(self,vertex):
         self._validate_vertex(vertex)
         return len(self.adj_list[vertex])
+
+    def degree_sequence(self):
+        sequence = []
+        for x in self.adj_list:
+            sequence.append(self.degree(x))
+            print(sequence)
+        sequence.sort(reverse=True)
+        return sequence
+    
+    def average_degree(self):
+        sequence = self.degree_sequence()
+        total = 0
+        for degree in sequence:
+            total += degree
+        return total/len(sequence)
+
+    
+    def _max_possible_edges(self,total_edges):
+        if total_edges == 0:
+            return 0
+        else:
+            return self._max_possible_edges((total_edges-1) + total_edges)
+        
+
+    def max_possible_edges(self):
+        total_edges = len(self.adj_list)
+        return self._max_possible_edges(total_edges)
+        
 g = Graph(weighted=True)
 g.add_vertex('A')
 g.get_neighbors('A')
-g.add_edge('A','A',500)
+g.add_vertex('B')
+g.add_edge('A','B')
+g.add_edge('A','A')
 print(g.degree('A'))
-print(g)
+
+print(g.degree_sequence())
+print(g.average_degree())
+
+# amount_of_nodes * 2 - 1
+# 3 * 2 - 1

@@ -1,28 +1,20 @@
-# # import re
-
-# # def is_valid_expression(expr):
-# #     # Allow digits, operators, and whitespace
-# #     return bool(re.fullmatch(r'[\d+\-*/ ().]+', expr))
-
-# # def evaluate_expression(expr):
-# #     if not is_valid_expression(expr):
-# #         raise ValueError("Invalid expression: contains illegal characters.")
-# #     try:
-# #         # Use eval carefully after validation
-# #         return eval(expr)
-# #     except Exception as e:
-# #         raise ValueError(f"Error evaluating expression: {e}")
-
-# # # Example
-# # problem = input("enter")
-# # result = evaluate_expression(problem)
-# # print(f"{problem} = {result}")
-
-
-
-
-# a = "hello"
-
-# print(eval("a"))
-# print('H\ni')
-# 
+def y(x):
+    if x <= 996:
+        if x == 0:
+            return 0
+        else:
+            return y(x-1) + x
+    else:
+        return x * (x-1)/2
+from time import perf_counter
+total_time = 0
+x = 100000
+for z in range(x):
+    start_time = perf_counter()
+    y(997)
+    end_time = perf_counter()
+    elapsed_time = end_time - start_time
+    total_time += elapsed_time
+    print(z)
+average_time = total_time/x
+print(average_time)

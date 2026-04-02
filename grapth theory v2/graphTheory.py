@@ -1,3 +1,4 @@
+from collections import deque
 class GraphError(Exception):
     pass
 class VertexNotFound(GraphError):
@@ -22,6 +23,8 @@ class Graph:
     def __str__(self):
         return str(self.adj_list)
     
+    def print_adj_list(self):
+        print(self.adj_list)
     def _validate_vertex(self,vertex):
         if vertex not in self.adj_list:
             raise VertexNotFound(vertex)
@@ -33,6 +36,7 @@ class Graph:
     def add_vertex(self,vertex):
         if not self.vertex_exists(vertex):
             self.adj_list[vertex] = {}
+
     
     def add_edge(self, v1,v2, weight = None):
         if not self.vertex_exists(v1):
@@ -101,15 +105,15 @@ class Graph:
             return total_edges
 
     def get_neighbors(self,vertex):
-        if self.vertex_exists(vertex):
-            return self.adj_list[vertex]
-        else:
-            raise VertexNotFound(vertex)
+        self._validate_vertex(vertex)
+
+        return self.adj_list[vertex]
     
     def remove_vertex(self,vertex):
         del self.adj_list[vertex]
     
     def vertex_exists(self, vertex):
+
         return vertex in self.adj_list
 
     def edge_exists(self,v1,v2):      
@@ -126,7 +130,6 @@ class Graph:
         sequence = []
         for x in self.adj_list:
             sequence.append(self.degree(x))
-            print(sequence)
         sequence.sort(reverse=True)
         return sequence
     
@@ -136,29 +139,45 @@ class Graph:
         for degree in sequence:
             total += degree
         return total/len(sequence)
-
-    
-    def _max_possible_edges(self,total_edges):
-        if total_edges == 0:
-            return 0
-        else:
-            return self._max_possible_edges((total_edges-1) + total_edges)
         
 
     def max_possible_edges(self):
-        total_edges = len(self.adj_list)
-        return self._max_possible_edges(total_edges)
+        n = len(self.adj_list)
+        return (n*(n+1))/2
+    
+    def density(self):
+        max_possible_edges = self.max_possible_edges()
+        total_edges_in_graph = self.edge_count()
+        return total_edges_in_graph / max_possible_edges
+    
+    def is_compleated(self):
+        return self.density() == 1
+    
+    def breath_first_search(self,start):
+        to_visit = deque([start])
+        visited_set = set()
+        visited_list = []
+        while len(to_visit) > 0:
+            current = to_visit[0]
+            to_visit.popleft()
+            for neighbor in self.get_neighbors(current):
+                if neighbor not in visited_set:
+                    to_visit.append(neighbor)
+                    visited_set.add(neighbor)
+            visited_list.append(current)
+        return visited_list
+    
+    def is_connected(self):
+        if len(self.adj_list) != 0:
+            for x in self.adj_list:
+                return len(self.breath_first_search(x)) == len(self.adj_list)
+        return True
+
         
 g = Graph(weighted=True)
 g.add_vertex('A')
-g.get_neighbors('A')
 g.add_vertex('B')
 g.add_edge('A','B')
-g.add_edge('A','A')
-print(g.degree('A'))
 
-print(g.degree_sequence())
-print(g.average_degree())
-
-# amount_of_nodes * 2 - 1
-# 3 * 2 - 1
+print(g.get_neighbors('A'), ' neighbors of a')
+print(g.is_connected())

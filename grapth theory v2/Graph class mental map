@@ -15,10 +15,10 @@ Graph Class
 │   ├── degree(vertex)                      DONE
 │   ├── degree_sequence()                   DONE
 │   ├── average_degree()                    DONE
-│   ├── max_possible_edges()      
-│   ├── density()                 
-│   ├── is_complete()             
-│   ├── is_connected()            
+│   ├── max_possible_edges()                DONE
+│   ├── density()                           DONE
+│   ├── is_complete()                       DONE
+│   ├── is_cfonnected()            
 │   ├── is_tree()                 
 │   ├── has_cycle()               
 │   └── is_bipartite()            
@@ -50,13 +50,13 @@ Graph Class
 │
 ├── Internal Helper Methods
 │   ├── vertex_exists(vertex)               DONE
-│   ├── edge_exists(v1, v2)       
-│   ├── validate_vertex(vertex)   
-│   ├── validate_edge(v1, v2)
-│   └── get_edge_weight(v1, v2)
+│   ├── edge_exists(v1, v2)                 DONE
+│   ├── validate_vertex(vertex)             DONE
+│   ├── validate_edge(v1, v2)               DONE
+│   └── get_edge_weight(v1, v2)             
 │
 └── Utility / Output
-    ├── __str__()                 
-    ├── print_adjacency_list()
+    ├── __str__()                           DONE    
+    ├── print_adjacency_list()              DONE
     ├── print_edges()
     └── visualize()

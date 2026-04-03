@@ -167,17 +167,25 @@ class Graph:
             visited_list.append(current)
         return visited_list
     
+    def depth_first_search(self,start):
+        #todo
+        pass
+
     def is_connected(self):
         if len(self.adj_list) != 0:
             for x in self.adj_list:
                 return len(self.breath_first_search(x)) == len(self.adj_list)
         return True
+    
+
 
         
 g = Graph(weighted=True)
 g.add_vertex('A')
 g.add_vertex('B')
 g.add_edge('A','B')
-
+g.add_edge('A','A')
+g.add_edge('B','B')
+print(g)
 print(g.get_neighbors('A'), ' neighbors of a')
 print(g.is_connected())

@@ -1,8 +1,10 @@
+from state_change_class import *
 class VendingMachine:
     def __init__(self, name):
         self.stock = {}
         self.balance = 0
         self.name = name
+        self.state = States()
 
     def __str__(self):
         return_string = f'{self.name} has a balance of {self.balance} and has,\n'

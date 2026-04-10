@@ -1,5 +1,6 @@
 from state_change_class import *
 from time import sleep
+from human_class import *
 class VendingMachine:
     def __init__(self, name):
         self.stock = {}
@@ -27,7 +28,7 @@ class VendingMachine:
         else:
             self.stock[item][0] += stock
 
-    def buy(self):
+    def buy(self, person:Human):
         self.state_machine.trigger('insert_money')
         item = input('What item do you want to buy?\n>')
         sleep(0.5)
@@ -40,12 +41,19 @@ class VendingMachine:
                 print('Your change has been returned please collect it before you leave.')
             else:
                 if self.stock[item][0] > 0:
-                    self.state_machine.trigger('select_item')
-                    self.stock[item][0] -= 1
-                    self.balance += self.stock[item][1]
-                    self.state_machine.trigger('dispense_done')
-                    sleep(0.5)
-                    print(f'Your {item} has been dispensed thank you for your purchase today!')
+                    if person.balance >= self.stock[item][1]:
+                        self.state_machine.trigger('select_item')
+                        self.stock[item][0] -= 1
+                        person.balance -= self.stock[item][1]
+                        self.balance += self.stock[item][1]
+                        self.state_machine.trigger('dispense_done')
+                        sleep(0.5)
+                        print(f'Your {item} has been dispensed thank you for your purchase today!')
+                    else:
+                        print(f'You dont have enough money to buy {item}.')
+                        self.state_machine.trigger('cancel')
+                        sleep(0.5)
+                        self.state_machine.trigger('change_returned')
                 else:
                     self.state_machine.trigger('cancel')
                     sleep(0.5)
@@ -78,7 +86,3 @@ class VendingMachine:
 
 
 
-a = VendingMachine('a')
-a.stock_item('IDK', 19, 10)
-a.buy()
-print(a)
